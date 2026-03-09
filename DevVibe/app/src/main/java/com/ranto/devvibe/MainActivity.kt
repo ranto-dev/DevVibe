@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         val btnPomodoro = findViewById<Button>(R.id.btnPomodoro)
         val btnMusic = findViewById<Button>(R.id.btnMusic)
         val btnStats = findViewById<Button>(R.id.btnStats)
+        val btnDailyQuote = findViewById<Button>(R.id.btnDailyQuote)
+
 
         btnPomodoro.setOnClickListener {
             startActivity(Intent(this, PomodoroActivity::class.java))
@@ -26,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         btnStats.setOnClickListener {
             startActivity(Intent(this, StatsActivity::class.java))
+        }
+
+        btnDailyQuote.setOnClickListener {
+            startActivity(Intent(this@MainActivity, QuoteActivity::class.java))
         }
     }
 }
