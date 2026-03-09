@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center"
     android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Pomodoro Timer"
-        android:textSize="26sp"
+        android:id="@+id/timerText"
+        android:text="25:00"
+        android:textSize="48sp"
         android:textStyle="bold"
+        android:layout_marginBottom="40dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
+        android:id="@+id/etMinutes"
+        android:hint="Enter minutes"
+        android:inputType="number"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#222222"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnSetTimer"
+        android:text="Set Timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:text="START"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnPause"
+        android:text="PAUSE"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:text="RESET"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
