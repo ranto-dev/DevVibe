@@ -1,5 +1,6 @@
 package com.ranto.devvibe
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ranto.devvibe.adapters.TrackAdapter
@@ -47,6 +49,8 @@ class MusicActivity : AppCompatActivity() {
         Track("Track 9",R.raw.lofi9),
     )
 
+    private lateinit var adapter: TrackAdapter
+
     private fun setupVolumeControl() {
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         volumeSeek.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
@@ -60,29 +64,41 @@ class MusicActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupPlaylistRecycler() {
         playlistRecycler.layoutManager = LinearLayoutManager(this)
-        playlistRecycler.adapter = TrackAdapter(tracks) { track, index ->
+        playlistRecycler.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        adapter = TrackAdapter(tracks) { track, index ->
             currentTrackIndex = index
-            mediaPlayer.release()
-            mediaPlayer = MediaPlayer.create(this, track.audioResId)
-            musicTitle.text = track.title
-            mediaPlayer.start()
-            btnPlay.text = "⏸"
-            vinylImage.startAnimation(rotateAnimation)
-            updateProgressBar()
+            adapter.currentTrackIndex = index
+            adapter.notifyDataSetChanged()
+            loadTrack(track)
         }
+        adapter.currentTrackIndex = currentTrackIndex
+        playlistRecycler.adapter = adapter
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun playNextTrack() {
         currentTrackIndex++
         if (currentTrackIndex >= tracks.size) currentTrackIndex = 0
+        adapter.currentTrackIndex = currentTrackIndex
+        adapter.notifyDataSetChanged()
         loadTrack(tracks[currentTrackIndex])
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun playPreviousTrack() {
         currentTrackIndex--
         if (currentTrackIndex < 0) currentTrackIndex = tracks.size - 1
+        adapter.currentTrackIndex = currentTrackIndex
+        adapter.notifyDataSetChanged()
         loadTrack(tracks[currentTrackIndex])
     }
 
@@ -94,33 +110,21 @@ class MusicActivity : AppCompatActivity() {
         btnPlay.text = "⏸"
         vinylImage.startAnimation(rotateAnimation)
         updateProgressBar()
+        musicProgress.max = mediaPlayer.duration
     }
 
     private fun updateProgressBar() {
         handler.post(object : Runnable {
+            @SuppressLint("SetTextI18n")
             override fun run() {
                 if (mediaPlayer.isPlaying) {
                     musicProgress.progress = mediaPlayer.currentPosition
-                    musicProgress.max = mediaPlayer.duration
                     timeText.text = "${formatTime(mediaPlayer.currentPosition)} / ${formatTime(mediaPlayer.duration)}"
                 }
-                handler.postDelayed(this, 1000)
+                handler.postDelayed(this, 500)
             }
         })
     }
-
-    private fun formatTime(ms: Int): String {
-        val minutes = (ms / 1000) / 60
-        val seconds = (ms / 1000) % 60
-        return String.format("%02d:%02d", minutes, seconds)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacksAndMessages(null)
-        mediaPlayer.release()
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,12 +145,26 @@ class MusicActivity : AppCompatActivity() {
         volumeSeek = findViewById(R.id.volumeSeek)
         playlistRecycler = findViewById(R.id.playlistRecycler)
 
+        // Initialisation du mediaPlayer
         mediaPlayer = MediaPlayer.create(this, tracks[currentTrackIndex].audioResId)
         musicTitle.text = tracks[currentTrackIndex].title
+        musicProgress.max = mediaPlayer.duration
 
         setupVolumeControl()
-        updateProgressBar()
         setupPlaylistRecycler()
+        updateProgressBar()
+
+        // SeekBar listener
+        musicProgress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress)
+                    timeText.text = "${formatTime(mediaPlayer.currentPosition)} / ${formatTime(mediaPlayer.duration)}"
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
 
         btnPlay.setOnClickListener {
             if (mediaPlayer.isPlaying) {
@@ -168,5 +186,18 @@ class MusicActivity : AppCompatActivity() {
             mediaPlayer.isLooping = isLooping
             btnLoop.text = if (isLooping) "Loop On" else "Loop Off"
         }
+    }
+
+    @SuppressLint("DefaultLocale")
+    private fun formatTime(ms: Int): String {
+        val minutes = (ms / 1000) / 60
+        val seconds = (ms / 1000) % 60
+        return String.format("%02d:%02d", minutes, seconds)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+        mediaPlayer.release()
     }
 }
