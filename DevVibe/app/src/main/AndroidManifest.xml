@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DevVibe">
         <activity
+            android:name=".DevStatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuoteActivity"
             android:exported="false" />
         <activity
