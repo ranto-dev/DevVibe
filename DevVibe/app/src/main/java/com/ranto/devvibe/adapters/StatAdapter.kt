@@ -13,12 +13,15 @@ class StatAdapter(private val stats: List<Stat>) :
     RecyclerView.Adapter<StatAdapter.StatViewHolder>() {
 
     class StatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val statTitle: TextView = itemView.findViewById(R.id.statTitle)
-        val statValue: TextView = itemView.findViewById(R.id.statValue)
-        val statProgress: ProgressBar = itemView.findViewById(R.id.statProgress)
+
+        val title: TextView = itemView.findViewById(R.id.statTitle)
+        val value: TextView = itemView.findViewById(R.id.statValue)
+        val progress: ProgressBar = itemView.findViewById(R.id.statProgress)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatViewHolder {
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_stat, parent, false)
 
@@ -29,14 +32,18 @@ class StatAdapter(private val stats: List<Stat>) :
 
         val stat = stats[position]
 
-        holder.statTitle.text = stat.title
-        holder.statValue.text = stat.value
+        holder.title.text = stat.title
+        holder.value.text = stat.value
 
         if (stat.progress != null) {
-            holder.statProgress.visibility = View.VISIBLE
-            holder.statProgress.progress = stat.progress
+
+            holder.progress.visibility = View.VISIBLE
+            holder.progress.progress = stat.progress
+
         } else {
-            holder.statProgress.visibility = View.GONE
+
+            holder.progress.visibility = View.GONE
+
         }
     }
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ranto.devvibe.adapters.TrackAdapter
+import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Track
 
 class MusicActivity : AppCompatActivity() {
@@ -25,6 +26,9 @@ class MusicActivity : AppCompatActivity() {
     private lateinit var btnNext: Button
     private lateinit var btnPrev: Button
     private lateinit var btnLoop: Button
+
+    private lateinit var statsManager: DevStatsManager
+    private var sessionStartTime: Long = 0
 
     private lateinit var musicTitle: TextView
     private lateinit var musicProgress: SeekBar
@@ -166,18 +170,33 @@ class MusicActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
+        val statsManager = DevStatsManager(this)
         btnPlay.setOnClickListener {
+
             if (mediaPlayer.isPlaying) {
+
                 mediaPlayer.pause()
                 btnPlay.text = "▶"
                 vinylImage.clearAnimation()
+
+                // calcul du temps de focus
+                val endTime = System.currentTimeMillis()
+                val duration = endTime - sessionStartTime
+
+                statsManager.addFocusTime(duration)
+
             } else {
+
                 mediaPlayer.start()
                 btnPlay.text = "⏸"
                 vinylImage.startAnimation(rotateAnimation)
+
+                // début session
+                sessionStartTime = System.currentTimeMillis()
+
+                statsManager.incrementCodingSession()
             }
         }
-
         btnNext.setOnClickListener { playNextTrack() }
         btnPrev.setOnClickListener { playPreviousTrack() }
 
