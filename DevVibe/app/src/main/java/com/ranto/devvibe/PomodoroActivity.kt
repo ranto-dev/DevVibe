@@ -9,6 +9,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
+import androidx.core.app.NotificationCompat
+
+enum class PomodoroState {
+    FOCUS,
+    BREAK
+}
 
 class PomodoroActivity : AppCompatActivity() {
     private lateinit var timerText: TextView
@@ -21,6 +30,10 @@ class PomodoroActivity : AppCompatActivity() {
     private var timeLeftInMillis: Long = 1500000 // 25 minutes
     private var timer: CountDownTimer? = null
     private var timerRunning = false
+    private var currentState = PomodoroState.FOCUS
+    private var focusDuration = 25 * 60 * 1000L
+    private var breakDuration = 5 * 60 * 1000L
+    private lateinit var stateText: TextView
 
     private fun startTimer() {
         timer = object : CountDownTimer(timeLeftInMillis, 1000) {
@@ -30,7 +43,19 @@ class PomodoroActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                timerRunning = false
+
+                if (currentState == PomodoroState.FOCUS) {
+                    currentState = PomodoroState.BREAK
+                    timeLeftInMillis = breakDuration
+                    Toast.makeText(this@PomodoroActivity, "Break time!", Toast.LENGTH_SHORT).show()
+                } else {
+                    currentState = PomodoroState.FOCUS
+                    timeLeftInMillis = focusDuration
+                    Toast.makeText(this@PomodoroActivity, "Focus time!", Toast.LENGTH_SHORT).show()
+                }
+
+                updateTimer()
+                showNotification("Session finished!")
             }
         }.start()
 
@@ -55,6 +80,37 @@ class PomodoroActivity : AppCompatActivity() {
 
         val timeFormatted = String.format("%02d:%02d", minutes, seconds)
         timerText.text = timeFormatted
+
+        stateText.text = if (currentState == PomodoroState.FOCUS) {
+            "FOCUS"
+        } else {
+            "BREAK"
+        }
+    }
+
+    private fun showNotification(message: String) {
+
+        val notificationManager =
+            getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        val channelId = "pomodoro_channel"
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Pomodoro Timer",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setContentTitle("DevVibe")
+            .setContentText(message)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .build()
+
+        notificationManager.notify(1, notification)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +124,7 @@ class PomodoroActivity : AppCompatActivity() {
         btnStart = findViewById(R.id.btnStart)
         btnPause = findViewById(R.id.btnPause)
         btnReset = findViewById(R.id.btnReset)
+        stateText = findViewById(R.id.stateText)
 
         btnSetTimer.setOnClickListener {
             val input = etMinutes.text.toString().trim()
