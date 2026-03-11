@@ -16,16 +16,16 @@
             android:name=".DevStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".QuoteActivity"
+            android:name=".activities.QuoteActivity"
             android:exported="false" />
         <activity
-            android:name=".StatsActivity"
+            android:name=".activities.StatsActivity"
             android:exported="false" />
         <activity
-            android:name=".MusicActivity"
+            android:name=".activities.MusicActivity"
             android:exported="false" />
         <activity
-            android:name=".PomodoroActivity"
+            android:name=".activities.PomodoroActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

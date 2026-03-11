@@ -1,4 +1,4 @@
-package com.ranto.devvibe
+package com.ranto.devvibe.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,11 +8,13 @@ import android.media.MediaPlayer
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ranto.devvibe.R
 import com.ranto.devvibe.adapters.TrackAdapter
 import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Track
@@ -20,7 +22,7 @@ import com.ranto.devvibe.models.Track
 class MusicActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var vinylImage: ImageView
-    private lateinit var rotateAnimation: android.view.animation.Animation
+    private lateinit var rotateAnimation: Animation
 
     private lateinit var btnPlay: Button
     private lateinit var btnNext: Button
@@ -42,15 +44,15 @@ class MusicActivity : AppCompatActivity() {
     private var isLooping = false
 
     private val tracks = listOf(
-        Track("Track 1",R.raw.lofi1),
-        Track("Track 2",R.raw.lofi2),
-        Track("Track 3",R.raw.lofi3),
-        Track("Track 4",R.raw.lofi4),
-        Track("Track 5",R.raw.lofi5),
-        Track("Track 6",R.raw.lofi6),
-        Track("Track 7",R.raw.lofi7),
-        Track("Track 8",R.raw.lofi8),
-        Track("Track 9",R.raw.lofi9),
+        Track("Track 1", R.raw.lofi1),
+        Track("Track 2", R.raw.lofi2),
+        Track("Track 3", R.raw.lofi3),
+        Track("Track 4", R.raw.lofi4),
+        Track("Track 5", R.raw.lofi5),
+        Track("Track 6", R.raw.lofi6),
+        Track("Track 7", R.raw.lofi7),
+        Track("Track 8", R.raw.lofi8),
+        Track("Track 9", R.raw.lofi9),
     )
 
     private lateinit var adapter: TrackAdapter

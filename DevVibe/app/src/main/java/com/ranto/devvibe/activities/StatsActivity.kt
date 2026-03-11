@@ -1,10 +1,11 @@
-package com.ranto.devvibe
+package com.ranto.devvibe.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ranto.devvibe.R
 import com.ranto.devvibe.adapters.StatAdapter
 import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Stat

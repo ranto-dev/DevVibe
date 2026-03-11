@@ -1,5 +1,6 @@
-package com.ranto.devvibe
+package com.ranto.devvibe.activities
 
+import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -107,7 +108,7 @@ class PomodoroActivity : AppCompatActivity() {
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("DevVibe")
             .setContentText(message)
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setSmallIcon(R.drawable.ic_dialog_info)
             .build()
 
         notificationManager.notify(1, notification)
@@ -116,15 +117,15 @@ class PomodoroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_pomodoro)
+        setContentView(com.ranto.devvibe.R.layout.activity_pomodoro)
 
-        timerText = findViewById(R.id.timerText)
-        etMinutes = findViewById(R.id.etMinutes)
-        btnSetTimer = findViewById(R.id.btnSetTimer)
-        btnStart = findViewById(R.id.btnStart)
-        btnPause = findViewById(R.id.btnPause)
-        btnReset = findViewById(R.id.btnReset)
-        stateText = findViewById(R.id.stateText)
+        timerText = findViewById(com.ranto.devvibe.R.id.timerText)
+        etMinutes = findViewById(com.ranto.devvibe.R.id.etMinutes)
+        btnSetTimer = findViewById(com.ranto.devvibe.R.id.btnSetTimer)
+        btnStart = findViewById(com.ranto.devvibe.R.id.btnStart)
+        btnPause = findViewById(com.ranto.devvibe.R.id.btnPause)
+        btnReset = findViewById(com.ranto.devvibe.R.id.btnReset)
+        stateText = findViewById(com.ranto.devvibe.R.id.stateText)
 
         btnSetTimer.setOnClickListener {
             val input = etMinutes.text.toString().trim()
