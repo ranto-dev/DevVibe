@@ -1,29 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#FAFAFA"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Add Task Button -->
-    <Button
-        android:id="@+id/btnAdd"
-        android:text="Add Task"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6200EE"
-        android:layout_marginTop="24dp"
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/todo_header"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:elevation="4dp"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="12dp">
 
-    <!-- RecyclerView -->
+        <Button
+            android:id="@+id/btnAdd"
+            android:text="Add Task"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#6200EE"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:elevation="4dp"/>
+
+        <ImageButton
+            android:id="@+id/btnRefresh"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/refresh_icon"
+            android:scaleType="centerInside"
+            android:padding="14dp"
+            android:background="@drawable/rounded_button"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emptyStateLayout"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/empty_tasks"
+            android:alpha="0.8"/>
+
+        <TextView
+            android:text="Pas de tâche pour le moment"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#666"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Ajoutez une tâche pour commencer"
+            android:textSize="14sp"
+            android:textColor="#999"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

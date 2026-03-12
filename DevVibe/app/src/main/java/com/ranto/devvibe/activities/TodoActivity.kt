@@ -3,7 +3,11 @@ package com.ranto.devvibe.activities
 import androidx.activity.enableEdgeToEdge
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +21,26 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnAdd: Button
     private lateinit var adapter: TaskAdapter
+    private lateinit var emptyStateLayout: LinearLayout
     private var tasks = mutableListOf<Task>()
+    private lateinit var btnRefresh: ImageButton
 
     override fun onResume() {
         super.onResume()
         tasks.clear()
         tasks.addAll(JsonStorage.loadTasks(this))
         adapter.notifyDataSetChanged()
+        updateUI()
+    }
+
+    private fun updateUI() {
+        if (tasks.isEmpty()) {
+            emptyStateLayout.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            emptyStateLayout.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +50,11 @@ class PomodoroActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         btnAdd = findViewById(R.id.btnAdd)
+        emptyStateLayout = findViewById(R.id.emptyStateLayout)
+        btnRefresh = findViewById<ImageButton>(R.id.btnRefresh)
 
         tasks = JsonStorage.loadTasks(this)
+        updateUI()
 
         adapter = TaskAdapter(this, tasks) { position ->
             val intent = Intent(this, AddEditTaskActivity::class.java)
@@ -47,6 +67,16 @@ class PomodoroActivity : AppCompatActivity() {
 
         btnAdd.setOnClickListener {
             startActivity(Intent(this, AddEditTaskActivity::class.java))
+        }
+
+        btnRefresh.setOnClickListener {
+
+            tasks.clear()
+            tasks.addAll(JsonStorage.loadTasks(this))
+
+            adapter.notifyDataSetChanged()
+            updateUI()
+            Toast.makeText(this, "Liste mise à jour", Toast.LENGTH_SHORT).show()
         }
     }
 }
