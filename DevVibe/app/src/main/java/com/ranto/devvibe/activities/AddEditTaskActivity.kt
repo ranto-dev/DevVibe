@@ -21,7 +21,7 @@ class AddEditTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_edit_task)
-        
+
         editTitle = findViewById(R.id.editTitle)
         editDuration = findViewById(R.id.editDuration)
         btnSave = findViewById(R.id.btnSave)
