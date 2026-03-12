@@ -36,22 +36,11 @@ class PomodoroActivity : AppCompatActivity() {
 
         tasks = JsonStorage.loadTasks(this)
 
-        adapter = TaskAdapter(
-            tasks,
-            onDelete = { position ->
-                tasks.removeAt(position)
-                JsonStorage.saveTasks(this, tasks)
-                adapter.notifyDataSetChanged()
-            },
-            onEdit = { position ->
-                val intent = Intent(this, AddEditTaskActivity::class.java)
-                intent.putExtra("index", position)
-                startActivity(intent)
-            },
-            onCheck = {
-                JsonStorage.saveTasks(this, tasks)
-            }
-        )
+        adapter = TaskAdapter(this, tasks) { position ->
+            val intent = Intent(this, AddEditTaskActivity::class.java)
+            intent.putExtra("index", position)
+            startActivity(intent)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
