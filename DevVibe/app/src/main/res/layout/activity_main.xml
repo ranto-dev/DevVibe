@@ -17,7 +17,7 @@
 
     <Button
         android:id="@+id/btnPomodoro"
-        android:text="Start Coding Timer"
+        android:text="Start Todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
