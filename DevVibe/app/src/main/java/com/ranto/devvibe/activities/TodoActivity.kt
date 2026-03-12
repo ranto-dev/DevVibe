@@ -26,20 +26,29 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var btnRefresh: ImageButton
 
     override fun onResume() {
+
         super.onResume()
+
         tasks.clear()
         tasks.addAll(JsonStorage.loadTasks(this))
+
         adapter.notifyDataSetChanged()
+
         updateUI()
     }
 
     private fun updateUI() {
+
         if (tasks.isEmpty()) {
+
             emptyStateLayout.visibility = View.VISIBLE
             recyclerView.visibility = View.GONE
+
         } else {
+
             emptyStateLayout.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
+
         }
     }
 
@@ -50,23 +59,37 @@ class PomodoroActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         btnAdd = findViewById(R.id.btnAdd)
+        btnRefresh = findViewById(R.id.btnRefresh)
         emptyStateLayout = findViewById(R.id.emptyStateLayout)
-        btnRefresh = findViewById<ImageButton>(R.id.btnRefresh)
 
         tasks = JsonStorage.loadTasks(this)
-        updateUI()
 
-        adapter = TaskAdapter(this, tasks) { position ->
-            val intent = Intent(this, AddEditTaskActivity::class.java)
-            intent.putExtra("index", position)
-            startActivity(intent)
-        }
+        adapter = TaskAdapter(
+            this,
+            tasks,
+            onEdit = { position ->
+
+                val intent = Intent(this, AddEditTaskActivity::class.java)
+                intent.putExtra("index", position)
+                startActivity(intent)
+
+            },
+            onOpenTimer = { position ->
+
+                val intent = Intent(this, TimerActivity::class.java)
+                intent.putExtra("taskIndex", position)
+                startActivity(intent)
+
+            }
+        )
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         btnAdd.setOnClickListener {
+
             startActivity(Intent(this, AddEditTaskActivity::class.java))
+
         }
 
         btnRefresh.setOnClickListener {
@@ -75,8 +98,13 @@ class PomodoroActivity : AppCompatActivity() {
             tasks.addAll(JsonStorage.loadTasks(this))
 
             adapter.notifyDataSetChanged()
+
             updateUI()
+
             Toast.makeText(this, "Liste mise à jour", Toast.LENGTH_SHORT).show()
+
         }
+
+        updateUI()
     }
 }

@@ -16,7 +16,8 @@ import android.graphics.Color
 class TaskAdapter(
     private val context: Context,
     private val tasks: MutableList<Task>,
-    private val onEdit: (Int) -> Unit
+    private val onEdit: (Int) -> Unit,
+    private val onOpenTimer: (Int) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,7 +29,9 @@ class TaskAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_task, parent, false)
+
         return TaskViewHolder(view)
     }
 
@@ -46,9 +49,12 @@ class TaskAdapter(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+
         val task = tasks[position]
+
         holder.titleText.text = task.title
         holder.durationText.text = task.duration
+
         holder.checkFinished.setOnCheckedChangeListener(null)
         holder.checkFinished.isChecked = task.isFinished
 
@@ -57,7 +63,14 @@ class TaskAdapter(
         holder.checkFinished.setOnCheckedChangeListener { _, isChecked ->
             task.isFinished = isChecked
             JsonStorage.saveTasks(context, tasks)
-            Toast.makeText(context, "Tâche marquée comme ${if (isChecked) "terminée" else "non terminée"}", Toast.LENGTH_SHORT).show()
+
+            updateTaskStyle(holder, task)
+
+            Toast.makeText(
+                context,
+                "Tâche marquée comme ${if (isChecked) "terminée" else "non terminée"}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         holder.btnEdit.setOnClickListener {
@@ -69,16 +82,31 @@ class TaskAdapter(
                 .setTitle("Supprimer la tâche")
                 .setMessage("Voulez-vous vraiment supprimer cette tâche ?")
                 .setPositiveButton("Oui") { dialog, _ ->
+
                     tasks.removeAt(position)
                     JsonStorage.saveTasks(context, tasks)
-                    notifyDataSetChanged() // classique avant optimisation
+
+                    notifyDataSetChanged()
+
                     Toast.makeText(context, "Tâche supprimée", Toast.LENGTH_SHORT).show()
+
                     dialog.dismiss()
                 }
                 .setNegativeButton("Annuler") { dialog, _ ->
                     dialog.dismiss()
                 }
                 .show()
+        }
+
+        // 👇 NOUVELLE FEATURE
+        holder.itemView.setOnClickListener {
+
+            if (!task.isFinished) {
+                onOpenTimer(position)
+            } else {
+                Toast.makeText(context, "Cette tâche est déjà terminée", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

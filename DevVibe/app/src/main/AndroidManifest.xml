@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DevVibe">
         <activity
+            android:name=".activities.TimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddEditTaskActivity"
             android:exported="false" />
         <activity
