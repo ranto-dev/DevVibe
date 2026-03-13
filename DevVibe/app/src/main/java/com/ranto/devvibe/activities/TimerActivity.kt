@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.ranto.devvibe.R
+import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.utils.JsonStorage
 
 class TimerActivity : AppCompatActivity() {
+
     private lateinit var taskTitle: TextView
     private lateinit var timerText: TextView
 
@@ -29,31 +31,37 @@ class TimerActivity : AppCompatActivity() {
     private var taskIndex = -1
     private var tasks = mutableListOf<Task>()
 
-    private fun startTimer() {
+    private lateinit var statsManager: DevStatsManager
 
+    private fun startTimer() {
         countDownTimer = object : CountDownTimer(timeLeft, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-
                 timeLeft = millisUntilFinished
                 updateTimer()
-
             }
 
             override fun onFinish() {
 
-                tasks[taskIndex].isFinished = true
-
+                // ✅ Marquer la tâche comme terminée
+                val task = tasks[taskIndex]
+                task.isFinished = true
                 JsonStorage.saveTasks(this@TimerActivity, tasks)
+
+                // ✅ Mettre à jour Daily Streak
+                statsManager.updateDailyStreak()
+
+                // ✅ Ajouter le temps de focus
+                val focusDuration = totalTime // en ms
+                statsManager.addFocusTime(focusDuration)
 
                 Toast.makeText(
                     this@TimerActivity,
-                    "Tâche terminée",
+                    "🎉 Tâche terminée! Daily Streak et Focus Time mis à jour.",
                     Toast.LENGTH_LONG
                 ).show()
 
                 finish()
-
             }
 
         }.start()
@@ -62,20 +70,15 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun pauseTimer() {
-
         if (running) {
-
             countDownTimer.cancel()
             running = false
-
         }
     }
 
     private fun updateTimer() {
-
         val minutes = (timeLeft / 1000) / 60
         val seconds = (timeLeft / 1000) % 60
-
         timerText.text = String.format("%02d:%02d", minutes, seconds)
     }
 
@@ -92,33 +95,27 @@ class TimerActivity : AppCompatActivity() {
         btnReset = findViewById(R.id.btnReset)
         btnQuit = findViewById(R.id.btnQuit)
 
-        tasks = JsonStorage.loadTasks(this)
+        // ✅ Initialiser les stats
+        statsManager = DevStatsManager(this)
 
+        tasks = JsonStorage.loadTasks(this)
         taskIndex = intent.getIntExtra("taskIndex", -1)
 
         val task = tasks[taskIndex]
-
         taskTitle.text = task.title
 
-        totalTime = task.duration.toLong() * 60 * 1000
+        totalTime = task.duration.toLong() * 60 * 1000 // minutes → ms
         timeLeft = totalTime
 
         updateTimer()
 
         btnStart.setOnClickListener { startTimer() }
-
         btnPause.setOnClickListener { pauseTimer() }
-
         btnReset.setOnClickListener {
-
             pauseTimer()
             timeLeft = totalTime
             updateTimer()
-
         }
-
-        btnQuit.setOnClickListener {
-            finish()
-        }
+        btnQuit.setOnClickListener { finish() }
     }
 }

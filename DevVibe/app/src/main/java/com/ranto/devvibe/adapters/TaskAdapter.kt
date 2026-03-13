@@ -3,6 +3,7 @@ package com.ranto.devvibe.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Paint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ranto.devvibe.R
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.utils.JsonStorage
-import android.graphics.Color
+import com.ranto.devvibe.managers.DevStatsManager
 
 class TaskAdapter(
     private val context: Context,
@@ -31,7 +32,6 @@ class TaskAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_task, parent, false)
-
         return TaskViewHolder(view)
     }
 
@@ -51,45 +51,57 @@ class TaskAdapter(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
 
         val task = tasks[position]
+        val statsManager = DevStatsManager(context)
 
+        // Texte et durée
         holder.titleText.text = task.title
         holder.durationText.text = task.duration
 
+        // Checkbox setup
         holder.checkFinished.setOnCheckedChangeListener(null)
         holder.checkFinished.isChecked = task.isFinished
-
         updateTaskStyle(holder, task)
 
+        // ✅ Checkbox listener avec Daily Streak sécurisé
         holder.checkFinished.setOnCheckedChangeListener { _, isChecked ->
+
             task.isFinished = isChecked
             JsonStorage.saveTasks(context, tasks)
-
             updateTaskStyle(holder, task)
 
-            Toast.makeText(
-                context,
-                "Tâche marquée comme ${if (isChecked) "terminée" else "non terminée"}",
-                Toast.LENGTH_SHORT
-            ).show()
+            if (isChecked) {
+                val updated = statsManager.updateDailyStreakOnce()
+                if (updated) {
+                    Toast.makeText(
+                        context,
+                        "🎉 Tâche terminée! Daily Streak mis à jour.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(
+                    context,
+                    "Tâche marquée comme non terminée",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
+        // Edit button
         holder.btnEdit.setOnClickListener {
             onEdit(position)
         }
 
+        // Delete button
         holder.btnDelete.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Supprimer la tâche")
                 .setMessage("Voulez-vous vraiment supprimer cette tâche ?")
                 .setPositiveButton("Oui") { dialog, _ ->
-
                     tasks.removeAt(position)
                     JsonStorage.saveTasks(context, tasks)
-
                     notifyDataSetChanged()
-
                     Toast.makeText(context, "Tâche supprimée", Toast.LENGTH_SHORT).show()
-
                     dialog.dismiss()
                 }
                 .setNegativeButton("Annuler") { dialog, _ ->
@@ -98,15 +110,13 @@ class TaskAdapter(
                 .show()
         }
 
-        // 👇 NOUVELLE FEATURE
+        // Click sur la ligne → Pomodoro Timer
         holder.itemView.setOnClickListener {
-
             if (!task.isFinished) {
                 onOpenTimer(position)
             } else {
                 Toast.makeText(context, "Cette tâche est déjà terminée", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 }
