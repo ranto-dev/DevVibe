@@ -1,13 +1,17 @@
 package com.ranto.devvibe
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
+import android.widget.PopupMenu
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
+import com.ranto.devvibe.activities.AboutActivity
 import com.ranto.devvibe.activities.MusicActivity
 import com.ranto.devvibe.activities.PomodoroActivity
 import com.ranto.devvibe.activities.QuoteActivity
 import com.ranto.devvibe.activities.StatsActivity
+import com.ranto.devvibe.activities.HelpActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,26 +19,55 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val btnPomodoro = findViewById<Button>(R.id.btnTodoPomorodo)
-        val btnMusic = findViewById<Button>(R.id.btnMusic)
-        val btnStats = findViewById<Button>(R.id.btnStats)
-        val btnDailyQuote = findViewById<Button>(R.id.btnDailyQuote)
+        val btnMenu = findViewById<MaterialButton>(R.id.btnMenu)
+        btnMenu.setOnClickListener {
 
+            val popup = PopupMenu(this, btnMenu)
 
-        btnPomodoro.setOnClickListener {
-            startActivity(Intent(this, PomodoroActivity::class.java))
+            popup.menu.add("Aide")
+            popup.menu.add("A propos")
+
+            popup.setOnMenuItemClickListener {
+
+                when(it.title){
+
+                    "Aide" -> {
+                        startActivity(Intent(this, HelpActivity::class.java))
+                        true
+                    }
+
+                    "A propos" -> {
+                        startActivity(Intent(this, AboutActivity::class.java))
+                        true
+                    }
+
+                    else -> false
+                }
+
+            }
+
+            popup.show()
         }
 
-        btnMusic.setOnClickListener {
+        val cardMusic = findViewById<View>(R.id.cardMusic)
+        val cardProject = findViewById<View>(R.id.cardProject)
+        val cardStats = findViewById<View>(R.id.cardStats)
+        val cardQuote = findViewById<View>(R.id.cardQuote)
+
+        cardMusic.setOnClickListener {
             startActivity(Intent(this, MusicActivity::class.java))
         }
 
-        btnStats.setOnClickListener {
+        cardProject.setOnClickListener {
+            startActivity(Intent(this, PomodoroActivity::class.java))
+        }
+
+        cardStats.setOnClickListener {
             startActivity(Intent(this, StatsActivity::class.java))
         }
 
-        btnDailyQuote.setOnClickListener {
-            startActivity(Intent(this@MainActivity, QuoteActivity::class.java))
+        cardQuote.setOnClickListener {
+            startActivity(Intent(this, QuoteActivity::class.java))
         }
     }
 }
