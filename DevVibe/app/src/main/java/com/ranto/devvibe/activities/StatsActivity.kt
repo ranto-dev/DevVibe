@@ -9,23 +9,37 @@ import com.ranto.devvibe.R
 import com.ranto.devvibe.adapters.StatAdapter
 import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Stat
+import com.ranto.devvibe.utils.JsonStorage
 
 class StatsActivity : AppCompatActivity() {
+
     private lateinit var statsRecycler: RecyclerView
     private lateinit var statsManager: DevStatsManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_stats)
 
-        val recycler = findViewById<RecyclerView>(R.id.statsRecycler)
+        statsRecycler = findViewById(R.id.statsRecycler)
+
         statsManager = DevStatsManager(this)
 
+        // Stats existantes
         val sessions = statsManager.getCodingSessions()
         val focusHours = statsManager.getFocusHours()
         val bugs = statsManager.getBugsFixed()
-        val projects = statsManager.getActiveProjects()
+
+        // Charger les tâches
+        val tasks = JsonStorage.loadTasks(this)
+
+        val totalTasks = tasks.size
+        val completedTasks = tasks.count { it.isFinished }
+        val activeTasks = tasks.count { !it.isFinished }
+
+        val completionProgress =
+            if (totalTasks == 0) 0 else (completedTasks * 100) / totalTasks
 
         val stats = listOf(
 
@@ -47,13 +61,18 @@ class StatsActivity : AppCompatActivity() {
             ),
 
             Stat(
-                "Active Projects",
-                "$projects projects"
-            )
+                "Tâches en cours",
+                "$activeTasks tâches"
+            ),
 
+            Stat(
+                "Tâches terminées",
+                "$completedTasks / $totalTasks",
+                completionProgress
+            )
         )
 
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = StatAdapter(stats)
+        statsRecycler.layoutManager = LinearLayoutManager(this)
+        statsRecycler.adapter = StatAdapter(stats)
     }
 }

@@ -34,16 +34,15 @@
     <Button
         android:id="@+id/btnMusic"
         android:text="Lofi Coding Music"
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnTodoPomorodo"
-        android:text="Start Todo"
+        android:text="Start With Project"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 
     <Button
         android:id="@+id/btnStats"

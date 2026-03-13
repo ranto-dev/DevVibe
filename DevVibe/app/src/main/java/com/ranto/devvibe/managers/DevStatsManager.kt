@@ -34,27 +34,7 @@ class DevStatsManager(context: Context) {
         return ms / (1000 * 60 * 60)
     }
 
-    fun incrementBugsFixed() {
-
-        val bugs = prefs.getInt("bugs_fixed", 0)
-
-        prefs.edit {
-            putInt("bugs_fixed", bugs + 1)
-        }
-    }
-
     fun getBugsFixed(): Int {
         return prefs.getInt("bugs_fixed", 0)
-    }
-
-    fun setActiveProjects(count: Int) {
-
-        prefs.edit {
-            putInt("active_projects", count)
-        }
-    }
-
-    fun getActiveProjects(): Int {
-        return prefs.getInt("active_projects", 0)
     }
 }
