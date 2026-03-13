@@ -8,14 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/headerImage"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/todo_header"/>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -23,17 +15,19 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="12dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdd"
-            android:text="Add Task"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#6200EE"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:elevation="4dp"/>
+            android:layout_height="52dp"
+            android:text="Nouvelle tâche"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            app:cornerRadius="14dp"
+            android:backgroundTint="#6366F1"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconPadding="8dp"/>
 
         <ImageButton
             android:id="@+id/btnRefresh"
@@ -45,6 +39,7 @@
             android:scaleType="centerInside"
             android:padding="14dp"
             android:background="@drawable/rounded_button"/>
+
     </LinearLayout>
 
     <LinearLayout
