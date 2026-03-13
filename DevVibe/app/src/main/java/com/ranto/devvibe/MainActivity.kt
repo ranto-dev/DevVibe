@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val btnPomodoro = findViewById<Button>(R.id.btnPomodoro)
+        val btnPomodoro = findViewById<Button>(R.id.btnTodoPomorodo)
         val btnMusic = findViewById<Button>(R.id.btnMusic)
         val btnStats = findViewById<Button>(R.id.btnStats)
         val btnDailyQuote = findViewById<Button>(R.id.btnDailyQuote)
