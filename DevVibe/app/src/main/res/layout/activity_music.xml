@@ -1,108 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f0f4f8"
-    android:gravity="center"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#f0f4f8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/vinylImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:contentDescription="vinyl"
-        android:src="@drawable/vinyl" />
+        android:src="@drawable/vinyl"/>
 
     <TextView
         android:id="@+id/musicTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="Lofi Music For You"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <SeekBar
         android:id="@+id/musicProgress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:progressTint="#2196F3"
+        android:thumbTint="#2196F3"
+        android:progressBackgroundTint="#BBDEFB"/>
 
     <TextView
         android:id="@+id/timeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="00:00 / 00:00"
         android:layout_marginTop="5dp"
-        android:text="00:00 / 00:00" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="Volume"
         android:layout_marginTop="20dp"
-        android:text="Volume" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <SeekBar
         android:id="@+id/volumeSeek"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:progressTint="#2196F3"
+        android:thumbTint="#2196F3"
+        android:progressBackgroundTint="#BBDEFB"/>
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
         <Button
             android:id="@+id/btnPrev"
             style="?android:attr/buttonBarButtonStyle"
+            android:text="⏮"
+            android:textColor="@color/black"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="⏮" />
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnPlay"
             style="?android:attr/buttonBarButtonStyle"
+            android:text="▶"
+            android:textColor="@color/black"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="▶" />
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnNext"
             style="?android:attr/buttonBarButtonStyle"
+            android:text="⏭"
+            android:textColor="@color/black"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="⏭" />
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <Button
         android:id="@+id/btnLoop"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:text="Loop Off"
+        android:backgroundTint="#2196F3"
         android:layout_marginTop="20dp"
-        android:text="Loop Off" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="Playlist"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"/>
 
 
     <com.google.android.material.card.MaterialCardView
         app:cardCornerRadius="16dp"
-        app:cardElevation="3dp"
+        app:cardElevation="2dp"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlistRecycler"
@@ -110,4 +107,6 @@
             android:layout_height="match_parent" />
 
     </com.google.android.material.card.MaterialCardView>
+
+
 </LinearLayout>
