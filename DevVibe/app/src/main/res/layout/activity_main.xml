@@ -42,7 +42,6 @@
         </LinearLayout>
 
 
-
         <!-- HERO / JUMBOTRON -->
 
         <com.google.android.material.card.MaterialCardView
@@ -302,9 +301,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDonate"
                     android:text="Donate"
+                    android:textColor="#FFFFFF"
                     android:layout_marginTop="12dp"
-                    android:background="#2196F3"
-                    app:cornerRadius="12dp"
+                    android:backgroundTint="#2196F3"
+                    app:cornerRadius="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
