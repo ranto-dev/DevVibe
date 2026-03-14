@@ -1,93 +1,113 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
-    android:background="#f0f4f8"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f0f4f8"
+    android:gravity="center"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <ImageView
         android:id="@+id/vinylImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/vinyl"/>
+        android:contentDescription="vinyl"
+        android:src="@drawable/vinyl" />
 
     <TextView
         android:id="@+id/musicTitle"
-        android:text="Track Title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Lofi Music For You"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <SeekBar
         android:id="@+id/musicProgress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/timeText"
-        android:text="00:00 / 00:00"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="00:00 / 00:00" />
 
     <TextView
-        android:text="Volume"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Volume" />
 
     <SeekBar
         android:id="@+id/volumeSeek"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnPrev"
             style="?android:attr/buttonBarButtonStyle"
-            android:text="⏮"
             android:layout_width="70dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="⏮" />
 
         <Button
             android:id="@+id/btnPlay"
             style="?android:attr/buttonBarButtonStyle"
-            android:text="▶"
             android:layout_width="70dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="▶" />
 
         <Button
             android:id="@+id/btnNext"
             style="?android:attr/buttonBarButtonStyle"
-            android:text="⏭"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content"
+            android:text="⏭" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnLoop"
-        android:text="Loop Off"
-        android:layout_marginTop="20dp"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Loop Off" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlistRecycler"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="Playlist"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardCornerRadius="16dp"
+        app:cardElevation="3dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="220dp">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playlistRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
