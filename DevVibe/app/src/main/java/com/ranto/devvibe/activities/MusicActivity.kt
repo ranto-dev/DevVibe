@@ -45,15 +45,15 @@ class MusicActivity : AppCompatActivity(),
     private var sessionStartTime: Long = 0
 
     private val tracks = listOf(
-        Track("Track 1", R.raw.lofi1),
-        Track("Track 2", R.raw.lofi2),
-        Track("Track 3", R.raw.lofi3),
-        Track("Track 4", R.raw.lofi4),
-        Track("Track 5", R.raw.lofi5),
-        Track("Track 6", R.raw.lofi6),
-        Track("Track 7", R.raw.lofi7),
-        Track("Track 8", R.raw.lofi8),
-        Track("Track 9", R.raw.lofi9),
+        Track("DJ MUSIC MIX 2026 VOL. 17 ⚡ Ultimate Mood Booster _ Best Happy EDM & Festival Vibes", R.raw.lofi1),
+        Track("1 Hour Upbeat Background Music - Best MBB Music Collection", R.raw.lofi2),
+        Track("3 AM Coding Session - Lofi Hip Hop Mix [Study & Coding Beats]", R.raw.lofi3),
+        Track("Cozy Guitar Lofi - Soft Drum Loops for Night Chill_128k", R.raw.lofi4),
+        Track("Fredji - Happy Life", R.raw.lofi5),
+        Track("Ikson - Sunny", R.raw.lofi6),
+        Track("Lofi Room - Cafe Music & Easy listening", R.raw.lofi7),
+        Track("Midnight Study Session - Calm Lofi Beats to Focus_320k", R.raw.lofi8),
+        Track("Paradise (Official)", R.raw.lofi9),
     )
 
     private lateinit var adapter: TrackAdapter
