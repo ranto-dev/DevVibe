@@ -170,6 +170,8 @@ class MusicActivity : AppCompatActivity(),
         btnPrev = findViewById(R.id.btnPrev)
         btnLoop = findViewById(R.id.btnLoop)
         musicTitle = findViewById(R.id.musicTitle)
+        musicTitle.isSelected = true
+        
         musicProgress = findViewById(R.id.musicProgress)
         timeText = findViewById(R.id.timeText)
         volumeSeek = findViewById(R.id.volumeSeek)
