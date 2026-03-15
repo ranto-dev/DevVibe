@@ -1,11 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#f0f4f8"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- PLAYLIST SCREEN -->
 
     <LinearLayout
         android:id="@+id/playlistLayout"
@@ -16,8 +14,8 @@
 
         <TextView
             android:text="🎧 DevVibe Lofi Playlist"
-            android:textStyle="bold"
             android:textSize="22sp"
+            android:textStyle="bold"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -25,42 +23,64 @@
         <Button
             android:id="@+id/btnStartPlaylist"
             android:text="▶ Play Playlist"
-            android:backgroundTint="#2196F3"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <com.google.android.material.card.MaterialCardView
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playlistRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/playlistRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        <LinearLayout
+            android:id="@+id/miniPlayer"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
 
-        </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/miniTitle"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/miniPlayPause"
+                android:text="⏯"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/miniOpenPlayer"
+                android:text="🎵"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
-    <!-- PLAYER SCREEN -->
 
     <LinearLayout
         android:id="@+id/playerLayout"
         android:visibility="gone"
+        android:orientation="vertical"
         android:gravity="center"
         android:padding="24dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
             android:id="@+id/btnBackPlaylist"
             android:text="⬅ Playlist"
-            android:layout_gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -68,79 +88,57 @@
             android:id="@+id/vinylImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/vinyl"/>
+            android:src="@drawable/vinyl"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/musicTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🎵 Lofi Music"
+            android:text="🎵 Music"
             android:textSize="20sp"
             android:textStyle="bold"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <SeekBar
             android:id="@+id/musicProgress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:progressTint="#2196F3"
-            android:thumbTint="#2196F3"
-            android:progressBackgroundTint="#BBDEFB"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/timeText"
             android:text="00:00 / 00:00"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="🔊 Volume"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <SeekBar
             android:id="@+id/volumeSeek"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:progressTint="#2196F3"
-            android:thumbTint="#2196F3"
-            android:progressBackgroundTint="#BBDEFB"/>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
-            style="?android:attr/buttonBarStyle"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp"
             android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/btnPrev"
-                style="?android:attr/buttonBarButtonStyle"
-                android:text="⏮️"
+                android:text="⏮"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btnPlay"
-                style="?android:attr/buttonBarButtonStyle"
-                android:text="▶️"
+                android:text="▶"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btnNext"
-                style="?android:attr/buttonBarButtonStyle"
-                android:text="⏭️"
+                android:text="⏭"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"/>
 
@@ -149,8 +147,7 @@
         <Button
             android:id="@+id/btnLoop"
             android:text="Loop Off"
-            android:backgroundTint="#2196F3"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"/>
 
