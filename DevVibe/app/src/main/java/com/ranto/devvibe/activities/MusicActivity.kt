@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
@@ -43,6 +44,10 @@ class MusicActivity : AppCompatActivity(),
     private var currentTrackIndex = 0
     private var isLooping = false
     private var sessionStartTime: Long = 0
+    private lateinit var playlistLayout: LinearLayout
+    private lateinit var playerLayout: LinearLayout
+    private lateinit var btnBackPlaylist: Button
+    private lateinit var btnStartPlaylist: Button
 
     private val tracks = listOf(
         Track("DJ MUSIC MIX 2026 VOL. 17 ⚡ Ultimate Mood Booster _ Best Happy EDM & Festival Vibes", R.raw.lofi1),
@@ -85,10 +90,15 @@ class MusicActivity : AppCompatActivity(),
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         )
         adapter = TrackAdapter(tracks) { track, index ->
+
             currentTrackIndex = index
             adapter.currentTrackIndex = index
             adapter.notifyDataSetChanged()
+
             loadTrack(track)
+
+            playlistLayout.visibility = View.GONE
+            playerLayout.visibility = View.VISIBLE
         }
         adapter.currentTrackIndex = currentTrackIndex
         playlistRecycler.adapter = adapter
@@ -171,11 +181,32 @@ class MusicActivity : AppCompatActivity(),
         btnLoop = findViewById(R.id.btnLoop)
         musicTitle = findViewById(R.id.musicTitle)
         musicTitle.isSelected = true
-        
+
         musicProgress = findViewById(R.id.musicProgress)
         timeText = findViewById(R.id.timeText)
         volumeSeek = findViewById(R.id.volumeSeek)
         playlistRecycler = findViewById(R.id.playlistRecycler)
+
+        playlistLayout = findViewById(R.id.playlistLayout)
+        playerLayout = findViewById(R.id.playerLayout)
+
+        btnBackPlaylist = findViewById(R.id.btnBackPlaylist)
+        btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
+
+        btnStartPlaylist.setOnClickListener {
+
+            currentTrackIndex = 0
+            loadTrack(tracks[0])
+
+            playlistLayout.visibility = View.GONE
+            playerLayout.visibility = View.VISIBLE
+        }
+
+        btnBackPlaylist.setOnClickListener {
+
+            playerLayout.visibility = View.GONE
+            playlistLayout.visibility = View.VISIBLE
+        }
 
         setupVolumeControl()
         setupPlaylistRecycler()

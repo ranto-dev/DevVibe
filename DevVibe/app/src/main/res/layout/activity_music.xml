@@ -1,117 +1,159 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
     android:background="#f0f4f8"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/vinylImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/vinyl"/>
-
-    <TextView
-        android:id="@+id/musicTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lofi Music For You"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:scrollHorizontally="true"/>
-
-    <SeekBar
-        android:id="@+id/musicProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progressTint="#2196F3"
-        android:thumbTint="#2196F3"
-        android:progressBackgroundTint="#BBDEFB"/>
-
-    <TextView
-        android:id="@+id/timeText"
-        android:text="00:00 / 00:00"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:text="Volume"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <SeekBar
-        android:id="@+id/volumeSeek"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progressTint="#2196F3"
-        android:thumbTint="#2196F3"
-        android:progressBackgroundTint="#BBDEFB"/>
+    <!-- PLAYLIST SCREEN -->
 
     <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-
-        <Button
-            android:id="@+id/btnPrev"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="⏮"
-            android:textColor="@color/black"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnPlay"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="▶"
-            android:textColor="@color/black"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnNext"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="⏭"
-            android:textColor="@color/black"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnLoop"
-        android:text="Loop Off"
-        android:backgroundTint="#2196F3"
-        android:layout_marginTop="20dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"/>
-
-
-    <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
+        android:id="@+id/playlistLayout"
+        android:orientation="vertical"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/playlistRecycler"
+        <TextView
+            android:text="🎧 DevVibe Lofi Playlist"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnStartPlaylist"
+            android:text="▶ Play Playlist"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"/>
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/playlistRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+    <!-- PLAYER SCREEN -->
+
+    <LinearLayout
+        android:id="@+id/playerLayout"
+        android:visibility="gone"
+        android:gravity="center"
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnBackPlaylist"
+            android:text="⬅ Playlist"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/vinylImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/vinyl"/>
+
+        <TextView
+            android:id="@+id/musicTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lofi Music For You"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"/>
+
+        <SeekBar
+            android:id="@+id/musicProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressTint="#2196F3"
+            android:thumbTint="#2196F3"
+            android:progressBackgroundTint="#BBDEFB"/>
+
+        <TextView
+            android:id="@+id/timeText"
+            android:text="00:00 / 00:00"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Volume"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <SeekBar
+            android:id="@+id/volumeSeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressTint="#2196F3"
+            android:thumbTint="#2196F3"
+            android:progressBackgroundTint="#BBDEFB"/>
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/btnPrev"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="⏮"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnPlay"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="▶"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnNext"
+                style="?android:attr/buttonBarButtonStyle"
+                android:text="⏭"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLoop"
+            android:text="Loop Off"
+            android:backgroundTint="#2196F3"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>
