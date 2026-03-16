@@ -1,162 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#f0f4f8"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- PLAYLIST SCREEN -->
 
     <LinearLayout
         android:id="@+id/playlistLayout"
-        android:orientation="vertical"
-        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- HEADER JUMBOTRON -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="🎧 DevVibe Lofi Playlist"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="16dp"
+            android:background="#E3F2FD"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎧 DevVibe Lofi"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Focus, code and build your ideas with relaxing lofi beats."
+                android:textColor="#444"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <!-- PLAY BUTTON -->
 
         <Button
             android:id="@+id/btnStartPlaylist"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:text="▶ Play Playlist" />
+            android:layout_height="60dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#2196F3"
+            android:text="▶ Play Playlist"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <!-- PLAYLIST -->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlistRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
+
+        <!-- MINI PLAYER -->
 
         <LinearLayout
             android:id="@+id/miniPlayer"
-            android:visibility="gone"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:background="#FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:background="#F7F7F7"
+            android:elevation="4dp"
+            android:orientation="horizontal"
+            android:padding="14dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/miniTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
                 android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/miniPlayPause"
-                android:text="⏯"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="⏯"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/miniOpenPlayer"
-                android:text="🎵"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="🎵"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+
+    <!-- PLAYER SCREEN -->
     <LinearLayout
         android:id="@+id/playerLayout"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/btnBackPlaylist"
-            android:text="⬅ Playlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:id="@+id/vinylImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/vinyl"
-            android:layout_marginTop="20dp"/>
-
-        <TextView
-            android:id="@+id/musicTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Music title"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"/>
-
-        <SeekBar
-            android:id="@+id/musicProgress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/timeText"
-            android:text="00:00 / 00:00"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <SeekBar
-            android:id="@+id/volumeSeek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/btnPrev"
-                android:text="⏮"
-                android:layout_width="70dp"
+            <TextView
+                android:id="@+id/logoText"
+                android:text="🎵 Lofi music"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
-            <Button
-                android:id="@+id/btnPlay"
-                android:text="▶"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btnNext"
-                android:text="⏭"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"/>
+            <ImageButton
+                android:id="@+id/btnMenu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="menu button"
+                android:src="@android:drawable/ic_menu_more" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLoop"
-            android:text="Loop Off"
-            android:layout_marginTop="10dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
+            <ImageView
+                android:id="@+id/vinylImage"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/vinyl" />
+
+            <TextView
+                android:id="@+id/musicTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Music title"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/musicProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:progressTint="#2196F3"
+                android:thumbTint="#2196F3" />
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="00:00 / 00:00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volume"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/volumeSeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progressTint="#2196F3"
+                android:thumbTint="#2196F3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPrev"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="⏮️"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnPlay"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="▶️️"
+                    android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="⏭️"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLoop"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#2196F3"
+                android:text="Loop Off"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

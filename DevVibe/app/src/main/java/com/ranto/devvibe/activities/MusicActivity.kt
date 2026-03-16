@@ -41,9 +41,8 @@ class MusicActivity : AppCompatActivity(),
     private lateinit var playlistLayout: LinearLayout
     private lateinit var playerLayout: LinearLayout
 
-    private lateinit var btnBackPlaylist: Button
     private lateinit var btnStartPlaylist: Button
-
+    private lateinit var btnMenu: ImageButton
     // MINI PLAYER
     private lateinit var miniPlayer: LinearLayout
     private lateinit var miniTitle: TextView
@@ -57,6 +56,7 @@ class MusicActivity : AppCompatActivity(),
 
     private var currentTrackIndex = 0
     private var isLooping = false
+    private var isUpdatingProgress = false
 
     private lateinit var statsManager: DevStatsManager
 
@@ -115,7 +115,7 @@ class MusicActivity : AppCompatActivity(),
 
         btnPlay = findViewById(R.id.btnPlay)
         btnNext = findViewById(R.id.btnNext)
-        btnPrev = findViewById(R.id.btnPrev)
+        btnPrev = findViewById(R.id.btnPev)
         btnLoop = findViewById(R.id.btnLoop)
 
         musicTitle = findViewById(R.id.musicTitle)
@@ -129,8 +129,8 @@ class MusicActivity : AppCompatActivity(),
         playlistLayout = findViewById(R.id.playlistLayout)
         playerLayout = findViewById(R.id.playerLayout)
 
-        btnBackPlaylist = findViewById(R.id.btnBackPlaylist)
         btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
+        btnMenu = findViewById(R.id.btnMenu)
 
         miniPlayer = findViewById(R.id.miniPlayer)
         miniTitle = findViewById(R.id.miniTitle)
@@ -156,11 +156,23 @@ class MusicActivity : AppCompatActivity(),
             playerLayout.visibility = View.VISIBLE
         }
 
-        btnBackPlaylist.setOnClickListener {
+        btnMenu.setOnClickListener {
 
-            playerLayout.visibility = View.GONE
-            playlistLayout.visibility = View.VISIBLE
+            val popup = PopupMenu(this, btnMenu)
+
+            popup.menu.add("\uD83D\uDCFB Voir la playlist")
+
+            popup.setOnMenuItemClickListener {
+
+                playerLayout.visibility = View.GONE
+                playlistLayout.visibility = View.VISIBLE
+
+                true
+            }
+
+            popup.show()
         }
+
 
         btnPlay.setOnClickListener {
 
@@ -290,6 +302,9 @@ class MusicActivity : AppCompatActivity(),
     }
 
     private fun updateProgress() {
+
+        if (isUpdatingProgress) return
+        isUpdatingProgress = true
 
         handler.post(object : Runnable {
 
