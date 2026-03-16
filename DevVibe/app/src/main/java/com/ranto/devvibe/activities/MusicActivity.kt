@@ -1,6 +1,5 @@
 package com.ranto.devvibe.activities
 
-import android.annotation.SuppressLint
 import android.content.*
 import android.media.AudioManager
 import android.os.Bundle
@@ -26,14 +25,17 @@ class MusicActivity : AppCompatActivity(),
 
     private lateinit var vinylImage: ImageView
     private lateinit var rotateAnimation: Animation
+
     private lateinit var btnPlay: Button
     private lateinit var btnNext: Button
     private lateinit var btnPrev: Button
     private lateinit var btnLoop: Button
+
     private lateinit var musicTitle: TextView
     private lateinit var musicProgress: SeekBar
     private lateinit var timeText: TextView
     private lateinit var volumeSeek: SeekBar
+
     private lateinit var playlistRecycler: RecyclerView
 
     private lateinit var playlistLayout: LinearLayout
@@ -82,7 +84,9 @@ class MusicActivity : AppCompatActivity(),
 
             musicService?.setTrackCompletionListener(this@MusicActivity)
 
-            syncUIWithPlayer()
+            handler.post {
+                syncUIWithPlayer()
+            }
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -94,6 +98,11 @@ class MusicActivity : AppCompatActivity(),
         runOnUiThread { playNextTrack() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        syncUIWithPlayer()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -102,6 +111,8 @@ class MusicActivity : AppCompatActivity(),
         statsManager = DevStatsManager(this)
 
         vinylImage = findViewById(R.id.vinylImage)
+        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+
         btnPlay = findViewById(R.id.btnPlay)
         btnNext = findViewById(R.id.btnNext)
         btnPrev = findViewById(R.id.btnPrev)
@@ -112,6 +123,7 @@ class MusicActivity : AppCompatActivity(),
         timeText = findViewById(R.id.timeText)
 
         volumeSeek = findViewById(R.id.volumeSeek)
+
         playlistRecycler = findViewById(R.id.playlistRecycler)
 
         playlistLayout = findViewById(R.id.playlistLayout)
@@ -120,13 +132,13 @@ class MusicActivity : AppCompatActivity(),
         btnBackPlaylist = findViewById(R.id.btnBackPlaylist)
         btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
 
-        // MINI PLAYER
         miniPlayer = findViewById(R.id.miniPlayer)
         miniTitle = findViewById(R.id.miniTitle)
         miniPlayPause = findViewById(R.id.miniPlayPause)
         miniOpenPlayer = findViewById(R.id.miniOpenPlayer)
 
-        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+        musicTitle.isSelected = true
+        miniTitle.isSelected = true
 
         setupPlaylist()
         setupVolume()
@@ -157,10 +169,12 @@ class MusicActivity : AppCompatActivity(),
             if (service.isPlaying()) {
                 service.pauseMusic()
                 btnPlay.text = "▶"
+                miniPlayPause.text = "▶"
                 vinylImage.clearAnimation()
             } else {
                 service.resumeMusic()
                 btnPlay.text = "⏸"
+                miniPlayPause.text = "⏸"
                 vinylImage.startAnimation(rotateAnimation)
             }
         }
@@ -183,10 +197,14 @@ class MusicActivity : AppCompatActivity(),
 
             if (service.isPlaying()) {
                 service.pauseMusic()
+                btnPlay.text = "▶"
                 miniPlayPause.text = "▶"
+                vinylImage.clearAnimation()
             } else {
                 service.resumeMusic()
+                btnPlay.text = "⏸"
                 miniPlayPause.text = "⏸"
+                vinylImage.startAnimation(rotateAnimation)
             }
         }
 
@@ -209,6 +227,7 @@ class MusicActivity : AppCompatActivity(),
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
@@ -224,7 +243,6 @@ class MusicActivity : AppCompatActivity(),
         adapter = TrackAdapter(tracks) { track, index ->
 
             currentTrackIndex = index
-
             loadTrack(track)
 
             playlistLayout.visibility = View.GONE
@@ -255,7 +273,8 @@ class MusicActivity : AppCompatActivity(),
 
         currentTrackIndex++
 
-        if (currentTrackIndex >= tracks.size) currentTrackIndex = 0
+        if (currentTrackIndex >= tracks.size)
+            currentTrackIndex = 0
 
         loadTrack(tracks[currentTrackIndex])
     }
@@ -264,7 +283,8 @@ class MusicActivity : AppCompatActivity(),
 
         currentTrackIndex--
 
-        if (currentTrackIndex < 0) currentTrackIndex = tracks.size - 1
+        if (currentTrackIndex < 0)
+            currentTrackIndex = tracks.size - 1
 
         loadTrack(tracks[currentTrackIndex])
     }
@@ -277,17 +297,14 @@ class MusicActivity : AppCompatActivity(),
 
                 val service = musicService ?: return
 
-                if (service.isPlaying()) {
+                val current = service.getCurrentPosition()
+                val duration = service.getDuration()
 
-                    val current = service.getCurrentPosition()
-                    val duration = service.getDuration()
+                musicProgress.max = duration
+                musicProgress.progress = current
 
-                    musicProgress.max = duration
-                    musicProgress.progress = current
-
-                    timeText.text =
-                        "${formatTime(current)} / ${formatTime(duration)}"
-                }
+                timeText.text =
+                    "${formatTime(current)} / ${formatTime(duration)}"
 
                 handler.postDelayed(this, 500)
             }
@@ -340,7 +357,40 @@ class MusicActivity : AppCompatActivity(),
 
         if (!service.hasTrack()) return
 
-        miniPlayer.visibility = View.VISIBLE
+        val resId = service.currentTrackResId
+
+        val index = tracks.indexOfFirst {
+            it.audioResId == resId
+        }
+
+        if (index != -1) {
+
+            currentTrackIndex = index
+
+            val track = tracks[index]
+
+            musicTitle.text = track.title
+            miniTitle.text = track.title
+
+            miniPlayer.visibility = View.VISIBLE
+        }
+
+        if (service.isPlaying()) {
+
+            btnPlay.text = "⏸"
+            miniPlayPause.text = "⏸"
+
+            vinylImage.startAnimation(rotateAnimation)
+
+        } else {
+
+            btnPlay.text = "▶"
+            miniPlayPause.text = "▶"
+
+            vinylImage.clearAnimation()
+        }
+
+        updateProgress()
     }
 
     override fun onDestroy() {

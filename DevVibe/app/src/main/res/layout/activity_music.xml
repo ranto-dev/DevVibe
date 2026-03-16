@@ -13,18 +13,18 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="🎧 DevVibe Lofi Playlist"
             android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnStartPlaylist"
-            android:text="▶ Play Playlist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="66dp"
+            android:text="▶ Play Playlist" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlistRecycler"
@@ -50,6 +50,8 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:scrollHorizontally="true"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
@@ -93,13 +95,17 @@
 
         <TextView
             android:id="@+id/musicTitle"
-            android:text="🎵 Music"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Music title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"/>
 
         <SeekBar
             android:id="@+id/musicProgress"
