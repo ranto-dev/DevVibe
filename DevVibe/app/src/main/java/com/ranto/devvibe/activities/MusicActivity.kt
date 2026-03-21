@@ -115,7 +115,7 @@ class MusicActivity : AppCompatActivity(),
 
         btnPlay = findViewById(R.id.btnPlay)
         btnNext = findViewById(R.id.btnNext)
-        btnPrev = findViewById(R.id.btnPev)
+        btnPrev = findViewById(R.id.btnPrev)
         btnLoop = findViewById(R.id.btnLoop)
 
         musicTitle = findViewById(R.id.musicTitle)
