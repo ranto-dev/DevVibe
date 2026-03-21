@@ -2,10 +2,7 @@ package com.ranto.devvibe.activities
 
 import android.content.*
 import android.media.AudioManager
-import android.os.Bundle
-import android.os.Handler
-import android.os.IBinder
-import android.os.Looper
+import android.os.*
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -26,9 +23,9 @@ class MusicActivity : AppCompatActivity(),
     private lateinit var vinylImage: ImageView
     private lateinit var rotateAnimation: Animation
 
-    private lateinit var btnPlay: Button
-    private lateinit var btnNext: Button
-    private lateinit var btnPrev: Button
+    private lateinit var btnPlay: com.google.android.material.button.MaterialButton
+    private lateinit var btnNext: com.google.android.material.button.MaterialButton
+    private lateinit var btnPrev: com.google.android.material.button.MaterialButton
     private lateinit var btnLoop: Button
 
     private lateinit var musicTitle: TextView
@@ -37,12 +34,11 @@ class MusicActivity : AppCompatActivity(),
     private lateinit var volumeSeek: SeekBar
 
     private lateinit var playlistRecycler: RecyclerView
-
     private lateinit var playlistLayout: LinearLayout
     private lateinit var playerLayout: LinearLayout
-
     private lateinit var btnStartPlaylist: Button
     private lateinit var btnMenu: ImageButton
+
     // MINI PLAYER
     private lateinit var miniPlayer: LinearLayout
     private lateinit var miniTitle: TextView
@@ -50,14 +46,11 @@ class MusicActivity : AppCompatActivity(),
     private lateinit var miniOpenPlayer: Button
 
     private val handler = Handler(Looper.getMainLooper())
-
     private var musicService: MusicService? = null
     private var isBound = false
-
     private var currentTrackIndex = 0
     private var isLooping = false
     private var isUpdatingProgress = false
-
     private lateinit var statsManager: DevStatsManager
 
     private val tracks = listOf(
@@ -69,47 +62,27 @@ class MusicActivity : AppCompatActivity(),
         Track("Ikson - Sunny", R.raw.lofi6),
         Track("Lofi Room Cafe Music", R.raw.lofi7),
         Track("Midnight Study Session", R.raw.lofi8),
-        Track("Paradise (Official)", R.raw.lofi9),
+        Track("Paradise (Official)", R.raw.lofi9)
     )
 
     private lateinit var adapter: TrackAdapter
 
     private val serviceConnection = object : ServiceConnection {
-
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-
             val binder = service as MusicService.MusicBinder
             musicService = binder.getService()
             isBound = true
-
             musicService?.setTrackCompletionListener(this@MusicActivity)
-
-            handler.post {
-                syncUIWithPlayer()
-            }
+            handler.post { syncUIWithPlayer() }
         }
-
-        override fun onServiceDisconnected(name: ComponentName?) {
-            isBound = false
-        }
-    }
-
-    override fun onTrackCompleted() {
-        runOnUiThread { playNextTrack() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        syncUIWithPlayer()
+        override fun onServiceDisconnected(name: ComponentName?) { isBound = false }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_music)
 
         statsManager = DevStatsManager(this)
-
         vinylImage = findViewById(R.id.vinylImage)
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
 
@@ -121,14 +94,10 @@ class MusicActivity : AppCompatActivity(),
         musicTitle = findViewById(R.id.musicTitle)
         musicProgress = findViewById(R.id.musicProgress)
         timeText = findViewById(R.id.timeText)
-
         volumeSeek = findViewById(R.id.volumeSeek)
-
         playlistRecycler = findViewById(R.id.playlistRecycler)
-
         playlistLayout = findViewById(R.id.playlistLayout)
         playerLayout = findViewById(R.id.playerLayout)
-
         btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
         btnMenu = findViewById(R.id.btnMenu)
 
@@ -148,276 +117,155 @@ class MusicActivity : AppCompatActivity(),
         bindService(intent, serviceConnection, BIND_AUTO_CREATE)
 
         btnStartPlaylist.setOnClickListener {
-
             currentTrackIndex = 0
             loadTrack(tracks[0])
-
             playlistLayout.visibility = View.GONE
             playerLayout.visibility = View.VISIBLE
         }
 
         btnMenu.setOnClickListener {
-
             val popup = PopupMenu(this, btnMenu)
-
-            popup.menu.add("\uD83D\uDCFB Voir la playlist")
-
+            popup.menu.add("🎶 See Playlist")
             popup.setOnMenuItemClickListener {
-
                 playerLayout.visibility = View.GONE
                 playlistLayout.visibility = View.VISIBLE
-
                 true
             }
-
             popup.show()
         }
 
-
-        btnPlay.setOnClickListener {
-
-            val service = musicService ?: return@setOnClickListener
-
-            if (service.isPlaying()) {
-                service.pauseMusic()
-                btnPlay.text = "▶"
-                miniPlayPause.text = "▶"
-                vinylImage.clearAnimation()
-            } else {
-                service.resumeMusic()
-                btnPlay.text = "⏸"
-                miniPlayPause.text = "⏸"
-                vinylImage.startAnimation(rotateAnimation)
-            }
-        }
-
+        btnPlay.setOnClickListener { togglePlayPause() }
+        miniPlayPause.setOnClickListener { togglePlayPause() }
         btnNext.setOnClickListener { playNextTrack() }
-
         btnPrev.setOnClickListener { playPreviousTrack() }
 
         btnLoop.setOnClickListener {
-
             isLooping = !isLooping
             musicService?.setLooping(isLooping)
-
             btnLoop.text = if (isLooping) "Loop On" else "Loop Off"
         }
 
-        miniPlayPause.setOnClickListener {
-
-            val service = musicService ?: return@setOnClickListener
-
-            if (service.isPlaying()) {
-                service.pauseMusic()
-                btnPlay.text = "▶"
-                miniPlayPause.text = "▶"
-                vinylImage.clearAnimation()
-            } else {
-                service.resumeMusic()
-                btnPlay.text = "⏸"
-                miniPlayPause.text = "⏸"
-                vinylImage.startAnimation(rotateAnimation)
-            }
-        }
-
         miniOpenPlayer.setOnClickListener {
-
             playlistLayout.visibility = View.GONE
             playerLayout.visibility = View.VISIBLE
         }
 
         musicProgress.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(
-                seekBar: SeekBar?,
-                progress: Int,
-                fromUser: Boolean
-            ) {
-
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) musicService?.seekTo(progress)
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 
+    private fun togglePlayPause() {
+        val service = musicService ?: return
+        if (service.isPlaying()) service.pauseMusic() else service.resumeMusic()
+        updatePlayPauseIcon(service.isPlaying())
+    }
+
+    private fun updatePlayPauseIcon(isPlaying: Boolean) {
+        if (isPlaying) {
+            btnPlay.setIconResource(android.R.drawable.ic_media_pause)
+            miniPlayPause.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_media_pause, 0, 0, 0)
+            vinylImage.startAnimation(rotateAnimation)
+        } else {
+            btnPlay.setIconResource(android.R.drawable.ic_media_play)
+            miniPlayPause.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_media_play, 0, 0, 0)
+            vinylImage.clearAnimation()
+        }
+    }
+
     private fun setupPlaylist() {
-
         playlistRecycler.layoutManager = LinearLayoutManager(this)
-
-        playlistRecycler.addItemDecoration(
-            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        )
-
+        playlistRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         adapter = TrackAdapter(tracks) { track, index ->
-
             currentTrackIndex = index
             loadTrack(track)
-
             playlistLayout.visibility = View.GONE
             playerLayout.visibility = View.VISIBLE
         }
-
         playlistRecycler.adapter = adapter
     }
 
     private fun loadTrack(track: Track) {
-
         musicService?.playTrack(track.audioResId)
-
         musicTitle.text = track.title
         miniTitle.text = track.title
-
-        btnPlay.text = "⏸"
-        miniPlayPause.text = "⏸"
-
-        vinylImage.startAnimation(rotateAnimation)
-
+        updatePlayPauseIcon(true)
         miniPlayer.visibility = View.VISIBLE
-
         updateProgress()
     }
 
     private fun playNextTrack() {
-
-        currentTrackIndex++
-
-        if (currentTrackIndex >= tracks.size)
-            currentTrackIndex = 0
-
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.size
         loadTrack(tracks[currentTrackIndex])
     }
 
     private fun playPreviousTrack() {
-
-        currentTrackIndex--
-
-        if (currentTrackIndex < 0)
-            currentTrackIndex = tracks.size - 1
-
+        currentTrackIndex = if (currentTrackIndex - 1 < 0) tracks.size - 1 else currentTrackIndex - 1
         loadTrack(tracks[currentTrackIndex])
     }
 
     private fun updateProgress() {
-
         if (isUpdatingProgress) return
         isUpdatingProgress = true
-
         handler.post(object : Runnable {
-
             override fun run() {
-
                 val service = musicService ?: return
-
                 val current = service.getCurrentPosition()
                 val duration = service.getDuration()
-
                 musicProgress.max = duration
                 musicProgress.progress = current
-
-                timeText.text =
-                    "${formatTime(current)} / ${formatTime(duration)}"
-
+                timeText.text = "${formatTime(current)} / ${formatTime(duration)}"
                 handler.postDelayed(this, 500)
             }
         })
     }
 
     private fun formatTime(ms: Int): String {
-
         val minutes = (ms / 1000) / 60
         val seconds = (ms / 1000) % 60
-
         return String.format("%02d:%02d", minutes, seconds)
     }
 
     private fun setupVolume() {
-
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-
-        volumeSeek.max =
-            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-
-        volumeSeek.progress =
-            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-
-        volumeSeek.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(
-                seekBar: SeekBar?,
-                progress: Int,
-                fromUser: Boolean
-            ) {
-
-                audioManager.setStreamVolume(
-                    AudioManager.STREAM_MUSIC,
-                    progress,
-                    0
-                )
+        volumeSeek.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        volumeSeek.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        volumeSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 
     private fun syncUIWithPlayer() {
-
         val service = musicService ?: return
-
         if (!service.hasTrack()) return
-
-        val resId = service.currentTrackResId
-
-        val index = tracks.indexOfFirst {
-            it.audioResId == resId
-        }
-
+        val index = tracks.indexOfFirst { it.audioResId == service.currentTrackResId }
         if (index != -1) {
-
             currentTrackIndex = index
-
             val track = tracks[index]
-
             musicTitle.text = track.title
             miniTitle.text = track.title
-
             miniPlayer.visibility = View.VISIBLE
         }
-
-        if (service.isPlaying()) {
-
-            btnPlay.text = "⏸"
-            miniPlayPause.text = "⏸"
-
-            vinylImage.startAnimation(rotateAnimation)
-
-        } else {
-
-            btnPlay.text = "▶"
-            miniPlayPause.text = "▶"
-
-            vinylImage.clearAnimation()
-        }
-
+        updatePlayPauseIcon(service.isPlaying())
         updateProgress()
     }
 
+    override fun onTrackCompleted() { runOnUiThread { playNextTrack() } }
+
+    override fun onResume() { super.onResume(); syncUIWithPlayer() }
+
     override fun onDestroy() {
-
         super.onDestroy()
-
-        if (isBound) {
-
-            unbindService(serviceConnection)
-            isBound = false
-        }
-
+        if (isBound) { unbindService(serviceConnection); isBound = false }
         handler.removeCallbacksAndMessages(null)
     }
 }

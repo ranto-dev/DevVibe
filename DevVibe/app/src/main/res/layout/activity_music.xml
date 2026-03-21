@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <!-- PLAYLIST SCREEN -->
-
     <LinearLayout
         android:id="@+id/playlistLayout"
         android:layout_width="match_parent"
@@ -15,8 +14,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- HEADER JUMBOTRON -->
-
+        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,13 +38,10 @@
                 android:text="Focus, code and build your ideas with relaxing lofi beats."
                 android:textColor="#444"
                 android:textSize="14sp" />
-
         </LinearLayout>
 
-
         <!-- PLAY BUTTON -->
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnStartPlaylist"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -57,18 +52,14 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-
         <!-- PLAYLIST -->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlistRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-
         <!-- MINI PLAYER -->
-
         <LinearLayout
             android:id="@+id/miniPlayer"
             android:layout_width="match_parent"
@@ -95,12 +86,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/miniPlayPause"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="⏯"
+                android:text=""
+                app:iconTint="#2196F3"
                 android:textSize="18sp" />
 
             <Button
@@ -110,11 +102,9 @@
                 android:background="@android:color/transparent"
                 android:text="🎵"
                 android:textSize="18sp" />
-
         </LinearLayout>
 
     </LinearLayout>
-
 
     <!-- PLAYER SCREEN -->
     <LinearLayout
@@ -125,6 +115,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +131,7 @@
                 android:textColor="#000"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageButton
                 android:id="@+id/btnMenu"
@@ -149,9 +140,9 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="menu button"
                 android:src="@android:drawable/ic_menu_more" />
-
         </LinearLayout>
 
+        <!-- PLAYER CONTENT -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -217,30 +208,29 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPrev"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="⏮️"
-                    android:textSize="20sp" />
+                    app:icon="@android:drawable/ic_media_previous"
+                    app:iconTint="#333" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPlay"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="▶️️"
-                    android:textSize="22sp" />
+                    app:icon="@android:drawable/ic_media_play"
+                    app:iconTint="#333" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnNext"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="⏭️"
-                    android:textSize="20sp" />
-
+                    app:icon="@android:drawable/ic_media_next"
+                    app:iconTint="#333" />
             </LinearLayout>
 
             <Button
@@ -251,8 +241,6 @@
                 android:backgroundTint="#2196F3"
                 android:text="Loop Off"
                 android:textColor="#FFFFFF" />
-
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

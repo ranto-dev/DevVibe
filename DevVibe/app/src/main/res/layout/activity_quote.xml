@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
-    android:background="#f0f4f8"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f0f4f8"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/quoteText"
-        android:text="Daily Dev Quote"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        android:textColor="#222222"
-        android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Daily Dev Quote"
+        android:textColor="#222222"
+        android:textSize="24sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/btnNewQuote"
-        android:text="Next Quote"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#6200EE"
-        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#2196F3"
+        android:text="Next Quote"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
