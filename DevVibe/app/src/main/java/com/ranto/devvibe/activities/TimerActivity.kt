@@ -6,10 +6,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.ranto.devvibe.R
+import com.ranto.devvibe.managers.DevStatsManager
+import com.ranto.devvibe.managers.TimerManager
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.utils.JsonStorage
+import com.ranto.devvibe.utils.NotificationHelper
 import com.ranto.devvibe.utils.TimeUtils
-import com.ranto.devvibe.managers.DevStatsManager
 
 class TimerActivity : AppCompatActivity() {
 
@@ -29,7 +31,6 @@ class TimerActivity : AppCompatActivity() {
 
     private var totalTime: Long = 0
     private var timeLeft: Long = 0
-    private var running = false
 
     private var taskIndex = -1
     private var tasks = mutableListOf<Task>()
@@ -40,6 +41,7 @@ class TimerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
 
+        // Bind UI
         taskTitle = findViewById(R.id.taskTitle)
         taskDescription = findViewById(R.id.taskDescription)
         taskType = findViewById(R.id.taskType)
@@ -54,9 +56,9 @@ class TimerActivity : AppCompatActivity() {
 
         statsManager = DevStatsManager(this)
 
+        // Load task
         tasks = JsonStorage.loadTasks(this)
         taskIndex = intent.getIntExtra("taskIndex", -1)
-
         val task = tasks[taskIndex]
 
         taskTitle.text = task.title
@@ -71,42 +73,41 @@ class TimerActivity : AppCompatActivity() {
 
         updateTimer()
 
-        btnStart.setOnClickListener { startTimer() }
+        // Buttons
+        btnStart.setOnClickListener {
+            TimerManager.startTimer(this, timeLeft)
+            startLocalTimer()
+        }
+
         btnPause.setOnClickListener { pauseTimer() }
         btnReset.setOnClickListener { confirmReset() }
         btnQuit.setOnClickListener { confirmQuit() }
     }
 
-    private fun startTimer() {
-        if (running) return
+    override fun onResume() {
+        super.onResume()
+        if (TimerManager.isRunning(this)) {
+            timeLeft = TimerManager.getTimeLeft(this)
+            if (timeLeft <= 0) onTimerFinish() else startLocalTimer()
+        }
+    }
 
+    private fun startLocalTimer() {
         countDownTimer = object : CountDownTimer(timeLeft, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                timeLeft = millisUntilFinished
+                timeLeft = TimerManager.getTimeLeft(this@TimerActivity)
                 updateTimer()
             }
 
             override fun onFinish() {
-                val task = tasks[taskIndex]
-                task.isFinished = true
-                JsonStorage.saveTasks(this@TimerActivity, tasks)
-
-                statsManager.updateDailyStreak()
-                statsManager.addFocusTime(totalTime)
-
-                Toast.makeText(this@TimerActivity, "🎉 Tâche terminée !", Toast.LENGTH_LONG).show()
-                finish()
+                onTimerFinish()
             }
         }.start()
-
-        running = true
     }
 
     private fun pauseTimer() {
-        if (running) {
-            countDownTimer.cancel()
-            running = false
-        }
+        countDownTimer.cancel()
+        TimerManager.stopTimer(this)
     }
 
     private fun updateTimer() {
@@ -137,8 +138,20 @@ class TimerActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun onTimerFinish() {
+        TimerManager.stopTimer(this)
+        val task = tasks[taskIndex]
+        task.isFinished = true
+        JsonStorage.saveTasks(this, tasks)
+        statsManager.updateDailyStreak()
+        statsManager.addFocusTime(totalTime)
+        NotificationHelper.showNotification(this)
+        Toast.makeText(this, "🎉 Tâche terminée !", Toast.LENGTH_LONG).show()
+        finish()
+    }
+
     private fun setMotivation(task: Task) {
-        when(task.type.name) {
+        when (task.type.name) {
             "DEEP_WORK" -> {
                 focusMessage.text = "🔥 Deep work en cours..."
                 motivationText.text = "Le succès vient de la discipline."
