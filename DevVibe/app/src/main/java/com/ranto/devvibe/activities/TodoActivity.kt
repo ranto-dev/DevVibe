@@ -28,7 +28,6 @@ class PomodoroActivity : AppCompatActivity() {
         tasks.clear()
         tasks.addAll(JsonStorage.loadTasks(this))
 
-        // 🔥 TRI PAR HEURE
         tasks.sortBy { it.startTime }
 
         adapter.notifyDataSetChanged()
@@ -88,7 +87,7 @@ class PomodoroActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
             updateUI()
 
-            Toast.makeText(this, "Liste mise à jour", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "List is updated", Toast.LENGTH_SHORT).show()
         }
 
         updateUI()

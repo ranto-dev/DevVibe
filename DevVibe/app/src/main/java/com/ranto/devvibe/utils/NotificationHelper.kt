@@ -1,5 +1,6 @@
 package com.ranto.devvibe.utils
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -9,6 +10,7 @@ import com.ranto.devvibe.R
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
+import androidx.annotation.RequiresPermission
 import com.ranto.devvibe.receivers.TaskReminderReceiver
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,8 +33,8 @@ object NotificationHelper {
         }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle("⏰ Temps écoulé !")
-            .setContentText("Ta session est terminée, tâche accomplie ! 🎉")
+            .setContentTitle("⏰ Time's up!")
+            .setContentText("Your session is over, task completed! 🎉")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
@@ -40,6 +42,7 @@ object NotificationHelper {
         manager.notify(1, notification)
     }
 
+    @RequiresPermission(Manifest.permission.SCHEDULE_EXACT_ALARM)
     fun scheduleTaskNotification(
         context: Context,
         title: String,

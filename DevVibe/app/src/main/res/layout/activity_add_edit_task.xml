@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F4F6FB">
 
-    <!-- HEADER / BANNER -->
+    <!-- HEADER  -->
     <LinearLayout
         android:id="@+id/headerBanner"
         android:layout_width="0dp"
@@ -22,7 +22,7 @@
             android:id="@+id/formTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Planifie ton focus"
+            android:text="Plan Your Focus"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold"/>
@@ -31,13 +31,13 @@
             android:id="@+id/formSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Organise ton temps et reste concentré"
+            android:text="Organize your time and stay focused"
             android:textColor="#D1D5DB"
             android:textSize="14sp"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
-    <!-- FORMULAIRE SCROLLABLE -->
+    <!-- SCROLLABLE FORM -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -55,11 +55,11 @@
             android:gravity="center_horizontal"
             android:spacing="16dp">
 
-            <!-- Nom de la tâche -->
+            <!-- Task Name -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nom de la tâche"
+                android:hint="Task Name"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#D1D5DB"
                 app:boxCornerRadiusTopStart="8dp"
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Type de tâche"
+                android:hint="Task Type"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#D1D5DB"
                 app:boxCornerRadiusTopStart="8dp"
@@ -115,12 +115,12 @@
                     android:spinnerMode="dropdown"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Heure début -->
+            <!-- Start Time -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Heure début (HH:mm)"
+                android:hint="Start Time (HH:mm)"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#D1D5DB"
                 app:boxCornerRadiusTopStart="8dp"
@@ -135,12 +135,12 @@
                     android:inputType="time"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Heure fin -->
+            <!-- End Time -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Heure fin (HH:mm)"
+                android:hint="End Time (HH:mm)"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="#D1D5DB"
                 app:boxCornerRadiusTopStart="8dp"
@@ -155,14 +155,14 @@
                     android:inputType="time"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Bouton Enregistrer -->
+            <!-- Save Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:backgroundTint="#2196F3"
-                android:text="Enregistrer"
+                android:text="Save"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"

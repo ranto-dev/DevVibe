@@ -28,7 +28,7 @@ class TaskReminderReceiver : BroadcastReceiver() {
             manager.createNotificationChannel(channel)
         }
         val notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("⏰ C'est le moment !")
+            .setContentTitle("⏰ It's time!")
             .setContentText("$title - $description")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

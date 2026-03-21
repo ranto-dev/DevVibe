@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"/>
 
                 <TextView
-                    android:text="Chaque session te rapproche de tes objectifs 🚀"
+                    android:text="Each session brings you closer to your goals 🚀"
                     android:textColor="#6B7280"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp"
@@ -128,7 +128,7 @@
         <!-- MESSAGE -->
         <TextView
             android:id="@+id/focusMessage"
-            android:text="🚀 Focus en cours..."
+            android:text="🚀 Focus in progress..."
             android:textColor="#6B7280"
             android:textSize="13sp"
             android:gravity="center"
@@ -180,7 +180,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnQuit"
-            android:text="Quitter"
+            android:text="Quit"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="16dp"
             android:layout_width="match_parent"

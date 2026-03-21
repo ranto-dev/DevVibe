@@ -57,7 +57,7 @@ class TaskAdapter(
         val task = tasks[position]
         val statsManager = DevStatsManager(context)
 
-        // Texte
+        // Text
         holder.titleText.text = task.title
 
         // ⏱️ Time blocking
@@ -89,7 +89,7 @@ class TaskAdapter(
             if (isChecked) {
                 val updated = statsManager.updateDailyStreakOnce()
                 if (updated) {
-                    Toast.makeText(context, "🔥 Streak mis à jour !", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "🔥 Streak updated!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -102,15 +102,15 @@ class TaskAdapter(
         // Delete
         holder.btnDelete.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle("Supprimer")
-                .setMessage("Confirmer la suppression ?")
-                .setPositiveButton("Oui") { dialog, _ ->
+                .setTitle("Delete Task")
+                .setMessage("Are you sure you want to delete this task?")
+                .setPositiveButton("Yes") { dialog, _ ->
                     tasks.removeAt(position)
                     JsonStorage.saveTasks(context, tasks)
                     notifyDataSetChanged()
                     dialog.dismiss()
                 }
-                .setNegativeButton("Annuler", null)
+                .setNegativeButton("Cancel", null)
                 .show()
         }
 
@@ -119,7 +119,7 @@ class TaskAdapter(
             if (!task.isFinished) {
                 onOpenTimer(position)
             } else {
-                Toast.makeText(context, "Déjà terminée", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Already finished", Toast.LENGTH_SHORT).show()
             }
         }
     }

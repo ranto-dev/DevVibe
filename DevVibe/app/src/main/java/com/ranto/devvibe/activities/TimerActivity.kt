@@ -118,23 +118,23 @@ class TimerActivity : AppCompatActivity() {
 
     private fun confirmReset() {
         AlertDialog.Builder(this)
-            .setTitle("Réinitialiser")
-            .setMessage("Voulez-vous vraiment réinitialiser le timer ?")
-            .setPositiveButton("Oui") { _, _ ->
+            .setTitle("Reset Timer")
+            .setMessage("Are you sure you want to reset the timer?")
+            .setPositiveButton("Yes") { _, _ ->
                 pauseTimer()
                 timeLeft = totalTime
                 updateTimer()
             }
-            .setNegativeButton("Annuler", null)
+            .setNegativeButton("Cancel", null)
             .show()
     }
 
     private fun confirmQuit() {
         AlertDialog.Builder(this)
-            .setTitle("Quitter")
-            .setMessage("Voulez-vous vraiment quitter ?")
-            .setPositiveButton("Quitter") { _, _ -> finish() }
-            .setNegativeButton("Annuler", null)
+            .setTitle("Quit")
+            .setMessage("Are you sure you want to quit?")
+            .setPositiveButton("Quit") { _, _ -> finish() }
+            .setNegativeButton("Cancel", null)
             .show()
     }
 
@@ -146,27 +146,27 @@ class TimerActivity : AppCompatActivity() {
         statsManager.updateDailyStreak()
         statsManager.addFocusTime(totalTime)
         NotificationHelper.showNotification(this)
-        Toast.makeText(this, "🎉 Tâche terminée !", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "🎉 Task finished !", Toast.LENGTH_LONG).show()
         finish()
     }
 
     private fun setMotivation(task: Task) {
         when (task.type.name) {
             "DEEP_WORK" -> {
-                focusMessage.text = "🔥 Deep work en cours..."
-                motivationText.text = "Le succès vient de la discipline."
+                focusMessage.text = "🔥 Deep work in progress..."
+                motivationText.text = "Success comes from discipline."
             }
             "LEARNING" -> {
-                focusMessage.text = "📚 Apprentissage en cours..."
-                motivationText.text = "Chaque jour tu progresses."
+                focusMessage.text = "📚 Learning in progress..."
+                motivationText.text = "Every day you get better."
             }
             "MEETING" -> {
-                focusMessage.text = "🤝 Interaction en cours..."
-                motivationText.text = "Communiquer c’est évoluer."
+                focusMessage.text = "🤝 Meeting in progress..."
+                motivationText.text = "Communication is growth."
             }
             else -> {
-                focusMessage.text = "⚡ Petite tâche rapide"
-                motivationText.text = "Les petites actions comptent."
+                focusMessage.text = "⚡ Quick task underway"
+                motivationText.text = "Small actions make a difference."
             }
         }
     }
