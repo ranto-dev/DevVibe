@@ -12,7 +12,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.button.MaterialButton
@@ -20,12 +19,12 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="52dp"
-            android:text="Nouvelle tâche"
+            android:text="Ajouter"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             app:cornerRadius="14dp"
-            android:backgroundTint="#6366F1"
+            android:backgroundTint="#2196F3"
             app:icon="@android:drawable/ic_input_add"
             app:iconPadding="8dp"/>
 

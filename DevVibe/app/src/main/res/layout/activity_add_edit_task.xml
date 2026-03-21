@@ -13,7 +13,7 @@
         android:layout_height="150dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#6366F1"
+        android:background="#2196F3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:backgroundTint="#6366F1"
+                android:backgroundTint="#2196F3"
                 android:text="Enregistrer"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
