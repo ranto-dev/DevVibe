@@ -2,15 +2,13 @@ package com.ranto.devvibe.activities
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ranto.devvibe.R
-import com.ranto.devvibe.managers.DevStatsManager
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.utils.JsonStorage
+import com.ranto.devvibe.utils.TimeUtils
+import com.ranto.devvibe.managers.DevStatsManager
 
 class TimerActivity : AppCompatActivity() {
 
@@ -43,21 +41,16 @@ class TimerActivity : AppCompatActivity() {
 
             override fun onFinish() {
 
-                // ✅ Marquer la tâche comme terminée
                 val task = tasks[taskIndex]
                 task.isFinished = true
                 JsonStorage.saveTasks(this@TimerActivity, tasks)
 
-                // ✅ Mettre à jour Daily Streak
                 statsManager.updateDailyStreak()
-
-                // ✅ Ajouter le temps de focus
-                val focusDuration = totalTime // en ms
-                statsManager.addFocusTime(focusDuration)
+                statsManager.addFocusTime(totalTime)
 
                 Toast.makeText(
                     this@TimerActivity,
-                    "🎉 Tâche terminée! Daily Streak et Focus Time mis à jour.",
+                    "🎉 Tâche terminée !",
                     Toast.LENGTH_LONG
                 ).show()
 
@@ -84,7 +77,6 @@ class TimerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_timer)
 
         taskTitle = findViewById(R.id.taskTitle)
@@ -95,27 +87,32 @@ class TimerActivity : AppCompatActivity() {
         btnReset = findViewById(R.id.btnReset)
         btnQuit = findViewById(R.id.btnQuit)
 
-        // ✅ Initialiser les stats
         statsManager = DevStatsManager(this)
 
         tasks = JsonStorage.loadTasks(this)
         taskIndex = intent.getIntExtra("taskIndex", -1)
 
         val task = tasks[taskIndex]
-        taskTitle.text = task.title
 
-        totalTime = task.duration.toLong() * 60 * 1000 // minutes → ms
+        taskTitle.text = "${task.title} (${task.type})"
+
+        val minutes = TimeUtils.getDurationInMinutes(task.startTime, task.endTime)
+        totalTime = minutes * 60 * 1000
         timeLeft = totalTime
 
         updateTimer()
 
         btnStart.setOnClickListener { startTimer() }
         btnPause.setOnClickListener { pauseTimer() }
+
         btnReset.setOnClickListener {
             pauseTimer()
             timeLeft = totalTime
             updateTimer()
         }
-        btnQuit.setOnClickListener { finish() }
+
+        btnQuit.setOnClickListener {
+            finish()
+        }
     }
 }

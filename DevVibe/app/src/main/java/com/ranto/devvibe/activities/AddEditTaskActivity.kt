@@ -1,53 +1,73 @@
 package com.ranto.devvibe.activities
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import com.ranto.devvibe.R
 import com.ranto.devvibe.models.Task
+import com.ranto.devvibe.models.TaskType
 import com.ranto.devvibe.utils.JsonStorage
 
 class AddEditTaskActivity : AppCompatActivity() {
 
     private lateinit var editTitle: EditText
-    private lateinit var editDuration: EditText
+    private lateinit var editDescription: EditText
+    private lateinit var editStartTime: EditText
+    private lateinit var editEndTime: EditText
+    private lateinit var spinnerType: Spinner
     private lateinit var btnSave: Button
+
     private var tasks = mutableListOf<Task>()
     private var index = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_add_edit_task)
 
         editTitle = findViewById(R.id.editTitle)
-        editDuration = findViewById(R.id.editDuration)
+        editDescription = findViewById(R.id.editDescription)
+        editStartTime = findViewById(R.id.editStartTime)
+        editEndTime = findViewById(R.id.editEndTime)
+        spinnerType = findViewById(R.id.spinnerType)
         btnSave = findViewById(R.id.btnSave)
 
         tasks = JsonStorage.loadTasks(this)
 
+        val types = TaskType.values().map { it.name }
+        spinnerType.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, types)
+
         index = intent.getIntExtra("index", -1)
+
         if (index != -1) {
             val task = tasks[index]
             editTitle.setText(task.title)
-            editDuration.setText(task.duration)
+            editDescription.setText(task.description)
+            editStartTime.setText(task.startTime)
+            editEndTime.setText(task.endTime)
+            spinnerType.setSelection(task.type.ordinal)
         }
 
         btnSave.setOnClickListener {
             val title = editTitle.text.toString()
-            val duration = editDuration.text.toString()
-            if (title.isBlank() || duration.isBlank()) return@setOnClickListener
+            val description = editDescription.text.toString()
+            val start = editStartTime.text.toString()
+            val end = editEndTime.text.toString()
+            val type = TaskType.values()[spinnerType.selectedItemPosition]
+
+            if (title.isBlank() || start.isBlank() || end.isBlank()) {
+                Toast.makeText(this, "Champs requis", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (index == -1) {
-                tasks.add(Task(title, duration))
-                Toast.makeText(this, "Tâche ajoutée", Toast.LENGTH_SHORT).show()
+                tasks.add(Task(title, description, type, start, end))
             } else {
-                tasks[index].title = title
-                tasks[index].duration = duration
-                Toast.makeText(this, "Tâche modifiée", Toast.LENGTH_SHORT).show()
+                val task = tasks[index]
+                task.title = title
+                task.description = description
+                task.type = type
+                task.startTime = start
+                task.endTime = end
             }
 
             JsonStorage.saveTasks(this, tasks)
