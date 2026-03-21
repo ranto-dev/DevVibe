@@ -55,6 +55,8 @@
             android:name=".services.MusicService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+
+        <receiver android:name=".receivers.TaskReminderReceiver"/>
     </application>
 
 </manifest>

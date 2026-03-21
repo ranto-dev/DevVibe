@@ -7,6 +7,7 @@ import com.ranto.devvibe.R
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.models.TaskType
 import com.ranto.devvibe.utils.JsonStorage
+import com.ranto.devvibe.utils.NotificationHelper
 
 class AddEditTaskActivity : AppCompatActivity() {
 
@@ -71,6 +72,13 @@ class AddEditTaskActivity : AppCompatActivity() {
             }
 
             JsonStorage.saveTasks(this, tasks)
+
+            NotificationHelper.scheduleTaskNotification(
+                this,
+                title,
+                tasks[if (index == -1) tasks.size - 1 else index].description,
+                start
+            )
             finish()
         }
     }
