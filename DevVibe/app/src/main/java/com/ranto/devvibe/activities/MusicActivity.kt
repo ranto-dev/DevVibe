@@ -1,3 +1,34 @@
+/*
+ * Activity : MusicActivity
+ *
+ * Description :
+ * Cette activité gère la lecture de musique dans l'application DevVibe.
+ * Elle permet à l'utilisateur de :
+ * - Parcourir une playlist
+ * - Lire / mettre en pause une musique
+ * - Naviguer entre les pistes (suivante / précédente)
+ * - Activer ou désactiver le mode boucle
+ * - Contrôler le volume
+ * - Visualiser la progression de lecture
+ *
+ * Architecture :
+ * – Utilise un MusicService pour gérer la lecture en arrière-plan
+ * - Communication via ServiceConnection (bindService).
+ * -  Mise à jour UI via Handler (thread principal)
+ *
+ * Composants UI :
+ * - Player principal (lecture, progression, contrôles).
+ * - Playlist (RecyclerView).
+ * - Mini player (lecture rapide en bas)
+ *
+ * Fonctionnalités clés :
+ * - Synchronisation UI avec le service audio
+ * - Animation du vinyle pendant la lecture
+ * - Gestion automatique de la fin de piste
+ *
+ * Auteur : Ranto Andrianandraina
+* */
+
 package com.ranto.devvibe.activities
 
 import android.content.*
@@ -22,29 +53,23 @@ class MusicActivity : AppCompatActivity(),
 
     private lateinit var vinylImage: ImageView
     private lateinit var rotateAnimation: Animation
-
     private lateinit var btnPlay: com.google.android.material.button.MaterialButton
     private lateinit var btnNext: com.google.android.material.button.MaterialButton
     private lateinit var btnPrev: com.google.android.material.button.MaterialButton
     private lateinit var btnLoop: Button
-
     private lateinit var musicTitle: TextView
     private lateinit var musicProgress: SeekBar
     private lateinit var timeText: TextView
     private lateinit var volumeSeek: SeekBar
-
     private lateinit var playlistRecycler: RecyclerView
     private lateinit var playlistLayout: LinearLayout
     private lateinit var playerLayout: LinearLayout
     private lateinit var btnStartPlaylist: Button
     private lateinit var btnMenu: ImageButton
-
-    // MINI PLAYER
     private lateinit var miniPlayer: LinearLayout
     private lateinit var miniTitle: TextView
     private lateinit var miniPlayPause: Button
     private lateinit var miniOpenPlayer: Button
-
     private val handler = Handler(Looper.getMainLooper())
     private var musicService: MusicService? = null
     private var isBound = false
@@ -52,7 +77,7 @@ class MusicActivity : AppCompatActivity(),
     private var isLooping = false
     private var isUpdatingProgress = false
     private lateinit var statsManager: DevStatsManager
-
+    private lateinit var adapter: TrackAdapter
     private val tracks = listOf(
         Track("DJ MUSIC MIX 2026 VOL. 17 ⚡ Ultimate Mood Booster", R.raw.lofi1),
         Track("1 Hour Upbeat Background Music", R.raw.lofi2),
@@ -64,8 +89,6 @@ class MusicActivity : AppCompatActivity(),
         Track("Midnight Study Session", R.raw.lofi8),
         Track("Paradise (Official)", R.raw.lofi9)
     )
-
-    private lateinit var adapter: TrackAdapter
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -269,3 +292,4 @@ class MusicActivity : AppCompatActivity(),
         handler.removeCallbacksAndMessages(null)
     }
 }
+

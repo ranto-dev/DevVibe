@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+    Layout : activity_about.xml
+
+    Description :
+    Interface pour l'affichage des informations sur l'application.
+
+    Contenu :
+    - LinearLayout : pour la gestion des affichages
+    - ScrollView : pour la gestion scroll de l'ecran
+    - Boutons : play, pause, next, previous
+    - Menu : accès à la playlist
+
+    Organisation :
+    - LinearLayout vertical
+    - Header avec menu
+    - MaterialCardView: pour un UI moderne
+    - TextView : Pour l'affichage des informations et des contenus textes sur l'ecran
+
+    Auteur : Ranto Andrianandraina
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -7,8 +28,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="#FFFFFF">
-
-    <!-- CONTENU SCROLLABLE -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +40,6 @@
             android:layout_height="wrap_content">
 
             <!-- HEADER CARD -->
-
             <com.google.android.material.card.MaterialCardView
                 app:cardCornerRadius="18dp"
                 app:cardBackgroundColor="#2196F3"
@@ -54,10 +72,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-
             <!-- DESCRIPTION -->
-
             <TextView
                 android:text="About DevVibe"
                 android:textSize="18sp"
@@ -76,7 +91,6 @@
 
 
             <!-- FEATURES -->
-
             <TextView
                 android:text="Features"
                 android:textSize="18sp"
@@ -93,10 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-
-
             <!-- VERSION -->
-
             <TextView
                 android:text="App Version"
                 android:textSize="18sp"
@@ -134,7 +145,6 @@
 
 
             <!-- FOOTER -->
-
             <TextView
                 android:text="Keep building amazing things 🚀"
                 android:textSize="14sp"
