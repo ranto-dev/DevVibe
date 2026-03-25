@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object TimeUtils {
-
     fun getDurationInMinutes(start: String, end: String): Long {
         return try {
             val format = SimpleDateFormat("HH:mm", Locale.getDefault())

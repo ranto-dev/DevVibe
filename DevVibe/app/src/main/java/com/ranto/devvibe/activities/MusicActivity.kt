@@ -50,7 +50,6 @@ import com.ranto.devvibe.services.MusicService
 
 class MusicActivity : AppCompatActivity(),
     MusicService.TrackCompletionListener {
-
     private lateinit var vinylImage: ImageView
     private lateinit var rotateAnimation: Animation
     private lateinit var btnPlay: com.google.android.material.button.MaterialButton
@@ -99,88 +98,6 @@ class MusicActivity : AppCompatActivity(),
             handler.post { syncUIWithPlayer() }
         }
         override fun onServiceDisconnected(name: ComponentName?) { isBound = false }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_music)
-
-        statsManager = DevStatsManager(this)
-        vinylImage = findViewById(R.id.vinylImage)
-        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
-
-        btnPlay = findViewById(R.id.btnPlay)
-        btnNext = findViewById(R.id.btnNext)
-        btnPrev = findViewById(R.id.btnPrev)
-        btnLoop = findViewById(R.id.btnLoop)
-
-        musicTitle = findViewById(R.id.musicTitle)
-        musicProgress = findViewById(R.id.musicProgress)
-        timeText = findViewById(R.id.timeText)
-        volumeSeek = findViewById(R.id.volumeSeek)
-        playlistRecycler = findViewById(R.id.playlistRecycler)
-        playlistLayout = findViewById(R.id.playlistLayout)
-        playerLayout = findViewById(R.id.playerLayout)
-        btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
-        btnMenu = findViewById(R.id.btnMenu)
-
-        miniPlayer = findViewById(R.id.miniPlayer)
-        miniTitle = findViewById(R.id.miniTitle)
-        miniPlayPause = findViewById(R.id.miniPlayPause)
-        miniOpenPlayer = findViewById(R.id.miniOpenPlayer)
-
-        musicTitle.isSelected = true
-        miniTitle.isSelected = true
-
-        setupPlaylist()
-        setupVolume()
-
-        val intent = Intent(this, MusicService::class.java)
-        startService(intent)
-        bindService(intent, serviceConnection, BIND_AUTO_CREATE)
-
-        btnStartPlaylist.setOnClickListener {
-            currentTrackIndex = 0
-            loadTrack(tracks[0])
-            playlistLayout.visibility = View.GONE
-            playerLayout.visibility = View.VISIBLE
-        }
-
-        btnMenu.setOnClickListener {
-            val popup = PopupMenu(this, btnMenu)
-            popup.menu.add("🎶 See Playlist")
-            popup.setOnMenuItemClickListener {
-                playerLayout.visibility = View.GONE
-                playlistLayout.visibility = View.VISIBLE
-                true
-            }
-            popup.show()
-        }
-
-        btnPlay.setOnClickListener { togglePlayPause() }
-        miniPlayPause.setOnClickListener { togglePlayPause() }
-        btnNext.setOnClickListener { playNextTrack() }
-        btnPrev.setOnClickListener { playPreviousTrack() }
-
-        btnLoop.setOnClickListener {
-            isLooping = !isLooping
-            musicService?.setLooping(isLooping)
-            btnLoop.text = if (isLooping) "Loop On" else "Loop Off"
-        }
-
-        miniOpenPlayer.setOnClickListener {
-            playlistLayout.visibility = View.GONE
-            playerLayout.visibility = View.VISIBLE
-        }
-
-        musicProgress.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) musicService?.seekTo(progress)
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
     }
 
     private fun togglePlayPause() {
@@ -280,6 +197,88 @@ class MusicActivity : AppCompatActivity(),
         }
         updatePlayPauseIcon(service.isPlaying())
         updateProgress()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_music)
+
+        statsManager = DevStatsManager(this)
+        vinylImage = findViewById(R.id.vinylImage)
+        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+
+        btnPlay = findViewById(R.id.btnPlay)
+        btnNext = findViewById(R.id.btnNext)
+        btnPrev = findViewById(R.id.btnPrev)
+        btnLoop = findViewById(R.id.btnLoop)
+
+        musicTitle = findViewById(R.id.musicTitle)
+        musicProgress = findViewById(R.id.musicProgress)
+        timeText = findViewById(R.id.timeText)
+        volumeSeek = findViewById(R.id.volumeSeek)
+        playlistRecycler = findViewById(R.id.playlistRecycler)
+        playlistLayout = findViewById(R.id.playlistLayout)
+        playerLayout = findViewById(R.id.playerLayout)
+        btnStartPlaylist = findViewById(R.id.btnStartPlaylist)
+        btnMenu = findViewById(R.id.btnMenu)
+
+        miniPlayer = findViewById(R.id.miniPlayer)
+        miniTitle = findViewById(R.id.miniTitle)
+        miniPlayPause = findViewById(R.id.miniPlayPause)
+        miniOpenPlayer = findViewById(R.id.miniOpenPlayer)
+
+        musicTitle.isSelected = true
+        miniTitle.isSelected = true
+
+        setupPlaylist()
+        setupVolume()
+
+        val intent = Intent(this, MusicService::class.java)
+        startService(intent)
+        bindService(intent, serviceConnection, BIND_AUTO_CREATE)
+
+        btnStartPlaylist.setOnClickListener {
+            currentTrackIndex = 0
+            loadTrack(tracks[0])
+            playlistLayout.visibility = View.GONE
+            playerLayout.visibility = View.VISIBLE
+        }
+
+        btnMenu.setOnClickListener {
+            val popup = PopupMenu(this, btnMenu)
+            popup.menu.add("🎶 See Playlist")
+            popup.setOnMenuItemClickListener {
+                playerLayout.visibility = View.GONE
+                playlistLayout.visibility = View.VISIBLE
+                true
+            }
+            popup.show()
+        }
+
+        btnPlay.setOnClickListener { togglePlayPause() }
+        miniPlayPause.setOnClickListener { togglePlayPause() }
+        btnNext.setOnClickListener { playNextTrack() }
+        btnPrev.setOnClickListener { playPreviousTrack() }
+
+        btnLoop.setOnClickListener {
+            isLooping = !isLooping
+            musicService?.setLooping(isLooping)
+            btnLoop.text = if (isLooping) "Loop On" else "Loop Off"
+        }
+
+        miniOpenPlayer.setOnClickListener {
+            playlistLayout.visibility = View.GONE
+            playerLayout.visibility = View.VISIBLE
+        }
+
+        musicProgress.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) musicService?.seekTo(progress)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
     }
 
     override fun onTrackCompleted() { runOnUiThread { playNextTrack() } }

@@ -1,4 +1,5 @@
 package com.ranto.devvibe
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.ranto.devvibe.activities.AboutActivity
 import com.ranto.devvibe.activities.MusicActivity
-import com.ranto.devvibe.activities.PomodoroActivity
+import com.ranto.devvibe.activities.TodoActivity
 import com.ranto.devvibe.activities.QuoteActivity
 import com.ranto.devvibe.activities.StatsActivity
 import com.ranto.devvibe.activities.HelpActivity
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         cardProject.setOnClickListener {
-            startActivity(Intent(this, PomodoroActivity::class.java))
+            startActivity(Intent(this, TodoActivity::class.java))
         }
 
         cardStats.setOnClickListener {

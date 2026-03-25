@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- PLAYLIST SCREEN -->
     <LinearLayout
         android:id="@+id/playlistLayout"
         android:layout_width="match_parent"
@@ -14,7 +13,6 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +38,6 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- PLAY BUTTON -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnStartPlaylist"
             android:layout_width="match_parent"
@@ -52,14 +49,12 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- PLAYLIST -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlistRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- MINI PLAYER -->
         <LinearLayout
             android:id="@+id/miniPlayer"
             android:layout_width="match_parent"
@@ -106,7 +101,6 @@
 
     </LinearLayout>
 
-    <!-- PLAYER SCREEN -->
     <LinearLayout
         android:id="@+id/playerLayout"
         android:layout_width="match_parent"
@@ -115,7 +109,6 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,8 +134,7 @@
                 android:contentDescription="menu button"
                 android:src="@android:drawable/ic_menu_more" />
         </LinearLayout>
-
-        <!-- PLAYER CONTENT -->
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

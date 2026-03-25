@@ -3,7 +3,6 @@ package com.ranto.devvibe.managers
 import android.content.Context
 
 object TimerManager {
-
     private const val PREF = "timer_pref"
     private const val KEY_END_TIME = "end_time"
     private const val KEY_RUNNING = "running"

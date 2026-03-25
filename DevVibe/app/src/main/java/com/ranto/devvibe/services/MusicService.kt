@@ -10,25 +10,20 @@ import androidx.core.app.NotificationCompat
 import com.ranto.devvibe.R
 
 class MusicService : Service() {
-
     interface TrackCompletionListener {
         fun onTrackCompleted()
     }
 
     private var completionListener: TrackCompletionListener? = null
-
     private val binder = MusicBinder()
     private var mediaPlayer: MediaPlayer? = null
     var currentTrackResId: Int = -1
-
     private val channelId = "devvibe_music_channel"
     private val notifId = 1
 
     inner class MusicBinder : Binder() {
         fun getService(): MusicService = this@MusicService
     }
-
-    override fun onBind(intent: Intent): IBinder = binder
 
     fun setTrackCompletionListener(listener: TrackCompletionListener) {
         completionListener = listener
@@ -89,6 +84,8 @@ class MusicService : Service() {
             .build()
         startForeground(notifId, notification)
     }
+
+    override fun onBind(intent: Intent): IBinder = binder
 
     override fun onDestroy() {
         mediaPlayer?.release()

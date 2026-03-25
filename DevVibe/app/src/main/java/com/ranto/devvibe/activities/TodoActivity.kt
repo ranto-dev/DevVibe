@@ -12,27 +12,13 @@ import com.ranto.devvibe.adapters.TaskAdapter
 import com.ranto.devvibe.models.Task
 import com.ranto.devvibe.utils.JsonStorage
 
-class PomodoroActivity : AppCompatActivity() {
-
+class TodoActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnAdd: Button
     private lateinit var btnRefresh: ImageButton
     private lateinit var emptyStateLayout: LinearLayout
-
     private lateinit var adapter: TaskAdapter
     private var tasks = mutableListOf<Task>()
-
-    override fun onResume() {
-        super.onResume()
-
-        tasks.clear()
-        tasks.addAll(JsonStorage.loadTasks(this))
-
-        tasks.sortBy { it.startTime }
-
-        adapter.notifyDataSetChanged()
-        updateUI()
-    }
 
     private fun updateUI() {
         if (tasks.isEmpty()) {
@@ -46,7 +32,7 @@ class PomodoroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pomodoro)
+        setContentView(R.layout.activity_todo)
 
         recyclerView = findViewById(R.id.recyclerView)
         btnAdd = findViewById(R.id.btnAdd)
@@ -90,6 +76,18 @@ class PomodoroActivity : AppCompatActivity() {
             Toast.makeText(this, "List is updated", Toast.LENGTH_SHORT).show()
         }
 
+        updateUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        tasks.clear()
+        tasks.addAll(JsonStorage.loadTasks(this))
+
+        tasks.sortBy { it.startTime }
+
+        adapter.notifyDataSetChanged()
         updateUI()
     }
 }

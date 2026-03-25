@@ -10,14 +10,12 @@ import com.ranto.devvibe.utils.JsonStorage
 import com.ranto.devvibe.utils.NotificationHelper
 
 class AddEditTaskActivity : AppCompatActivity() {
-
     private lateinit var editTitle: EditText
     private lateinit var editDescription: EditText
     private lateinit var editStartTime: EditText
     private lateinit var editEndTime: EditText
     private lateinit var spinnerType: Spinner
     private lateinit var btnSave: Button
-
     private var tasks = mutableListOf<Task>()
     private var index = -1
 

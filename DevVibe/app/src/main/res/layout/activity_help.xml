@@ -41,7 +41,6 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- HEADER -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,8 +58,6 @@
                 android:textColor="#666"
                 android:textSize="14sp" />
 
-
-            <!-- MUSIC -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,8 +90,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- PROJECTS -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,8 +122,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- STATS -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -161,8 +154,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- QUOTES -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,8 +186,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- CONTACT -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

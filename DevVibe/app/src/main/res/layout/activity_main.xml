@@ -13,9 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <!-- HEADER -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,9 +38,6 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-
-        <!-- HERO / JUMBOTRON -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_marginTop="20dp"
@@ -79,10 +73,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-
-        <!-- SECTION TITLE -->
-
         <TextView
             android:text="Main Features"
             android:textSize="18sp"
@@ -92,10 +82,6 @@
             android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-
-
-        <!-- LOFI MUSIC CARD -->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardMusic"
@@ -133,9 +119,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- PROJECT CARD -->
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardProject"
             android:layout_marginBottom="14dp"
@@ -171,8 +154,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- STATS CARD -->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardStats"
@@ -210,10 +191,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-
-        <!-- QUOTE CARD -->
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardQuote"
             android:layout_marginBottom="14dp"
@@ -250,7 +227,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ABOUT SECTION -->
         <TextView
             android:text="Why DevVibe?"
             android:textSize="18sp"
@@ -268,7 +244,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!-- SUPPORT SECTION -->
         <com.google.android.material.card.MaterialCardView
             android:layout_marginTop="20dp"
             app:cardCornerRadius="18dp"
@@ -313,8 +288,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- FOOTER -->
         <TextView
             android:text="DevVibe • Stay focused and build amazing things 🚀"
             android:textSize="12sp"

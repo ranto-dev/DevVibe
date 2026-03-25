@@ -11,12 +11,9 @@ import com.ranto.devvibe.R
 class TaskReminderReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-
         val title = intent.getStringExtra("title") ?: "Tâche"
         val description = intent.getStringExtra("description") ?: ""
-
         val channelId = "task_channel"
-
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -27,6 +24,7 @@ class TaskReminderReceiver : BroadcastReceiver() {
             )
             manager.createNotificationChannel(channel)
         }
+
         val notification = NotificationCompat.Builder(context, channelId)
             .setContentTitle("⏰ It's time!")
             .setContentText("$title - $description")

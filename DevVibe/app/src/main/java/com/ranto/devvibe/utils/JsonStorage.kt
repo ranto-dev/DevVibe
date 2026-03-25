@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken
 import java.io.File
 
 object JsonStorage {
-
     private const val FILE_NAME = "tasks.json"
 
     fun saveTasks(context: Context, tasks: List<Task>) {

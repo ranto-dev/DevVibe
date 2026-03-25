@@ -12,7 +12,6 @@ import com.ranto.devvibe.models.Stat
 import com.ranto.devvibe.utils.JsonStorage
 
 class StatsActivity : AppCompatActivity() {
-
     private lateinit var statsRecycler: RecyclerView
     private lateinit var statsManager: DevStatsManager
 
@@ -24,7 +23,6 @@ class StatsActivity : AppCompatActivity() {
         statsRecycler = findViewById(R.id.statsRecycler)
         statsManager = DevStatsManager(this)
 
-        // Charger stats existantes
         val sessions = statsManager.getCodingSessions()
         val focusMinutes = statsManager.getFocusTimeMinutes()
         val hours = focusMinutes / 60
@@ -36,14 +34,12 @@ class StatsActivity : AppCompatActivity() {
             else -> "High Focus 🔥"
         }
 
-        // Charger les tâches
         val tasks = JsonStorage.loadTasks(this)
         val totalTasks = tasks.size
         val completedTasks = tasks.count { it.isFinished }
         val activeTasks = tasks.count { !it.isFinished }
         val completionProgress = if (totalTasks == 0) 0 else (completedTasks * 100) / totalTasks
 
-        // Liste des stats
         val stats = listOf(
             Stat(
                 "Coding Sessions",

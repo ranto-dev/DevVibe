@@ -57,16 +57,11 @@ class TaskAdapter(
         val task = tasks[position]
         val statsManager = DevStatsManager(context)
 
-        // Text
         holder.titleText.text = task.title
-
-        // ⏱️ Time blocking
         holder.timeBlockText.text = "${task.startTime} - ${task.endTime}"
 
         val duration = TimeUtils.getDurationInMinutes(task.startTime, task.endTime)
         holder.durationText.text = TimeUtils.formatDuration(duration)
-
-        // 🎯 Type
         holder.typeText.text = task.type.name
 
         when(task.type) {
@@ -76,7 +71,6 @@ class TaskAdapter(
             TaskType.QUICK_TASK -> holder.typeText.setTextColor(Color.GRAY)
         }
 
-        // Checkbox
         holder.checkFinished.setOnCheckedChangeListener(null)
         holder.checkFinished.isChecked = task.isFinished
         updateTaskStyle(holder, task)
@@ -94,12 +88,10 @@ class TaskAdapter(
             }
         }
 
-        // Edit
         holder.btnEdit.setOnClickListener {
             onEdit(position)
         }
 
-        // Delete
         holder.btnDelete.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Delete Task")
@@ -114,7 +106,6 @@ class TaskAdapter(
                 .show()
         }
 
-        // Click → Timer
         holder.itemView.setOnClickListener {
             if (!task.isFinished) {
                 onOpenTimer(position)

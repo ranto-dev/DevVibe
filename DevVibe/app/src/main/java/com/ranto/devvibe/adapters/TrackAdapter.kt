@@ -12,7 +12,6 @@ class TrackAdapter(
     private val tracks: List<Track>,
     private val onItemClick: (Track, Int) -> Unit
 ) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
-
     var currentTrackIndex: Int = -1
 
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,14 +28,12 @@ class TrackAdapter(
         val track = tracks[position]
         holder.trackTitle.text = track.title
 
-        // Highlight track actif
         holder.trackTitle.setBackgroundColor(
             if (position == currentTrackIndex) 0xFFE0E0E0.toInt() else 0x00000000
         )
 
         holder.itemView.setOnClickListener {
             onItemClick(track, position)
-            // effet click rapide
             holder.itemView.alpha = 0.5f
             holder.itemView.animate().alpha(1f).setDuration(150).start()
         }

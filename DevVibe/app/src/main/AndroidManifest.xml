@@ -41,7 +41,7 @@
             android:name=".activities.MusicActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.PomodoroActivity"
+            android:name=".activities.TodoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
