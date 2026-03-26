@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/statTitle"
-            android:text="Stat"
+            android:text="@string/stat"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
 
         <TextView
             android:id="@+id/statValue"
-            android:text="Value"
+            android:text="@string/value"
             android:textSize="20sp"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"

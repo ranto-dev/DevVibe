@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/logoText"
-                android:text="DevVibe"
+                android:text="@string/devvibe"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="#000"
@@ -32,7 +32,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMenu"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:text="⋮"
+                android:text="@string/menu"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Code. Focus. Build."
+                    android:text="@string/code_focus_build"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="DevVibe helps developers stay focused with lofi music, manage tasks, track productivity and stay motivated every day."
+                    android:text="@string/devvibe_helps_developers_stay_focused_with_lofi_music_manage_tasks_track_productivity_and_stay_motivated_every_day"
                     android:textSize="14sp"
                     android:textColor="#E3F2FD"
                     android:layout_marginTop="8dp"
@@ -74,7 +74,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:text="Main Features"
+            android:text="@string/main_features"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="26dp"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="🎧 Lofi Coding Music"
+                    android:text="@string/lofi_coding_music"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#000"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="Relax and code with curated lofi beats."
+                    android:text="@string/relax_and_code_with_curated_lofi_beats"
                     android:textSize="13sp"
                     android:textColor="#666"
                     android:layout_marginTop="4dp"
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="🚀 Start With Project"
+                    android:text="@string/start_with_project"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#000"
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="Organize your tasks and stay productive."
+                    android:text="@string/organize_your_tasks_and_stay_productive"
                     android:textSize="13sp"
                     android:textColor="#666"
                     android:layout_marginTop="4dp"
@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="📊 Dev Stats"
+                    android:text="@string/dev_stats"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#000"
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="Track your productivity and coding streak."
+                    android:text="@string/track_your_productivity_and_coding_streak"
                     android:textSize="13sp"
                     android:textColor="#666"
                     android:layout_marginTop="4dp"
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="💬 Daily Dev Quote"
+                    android:text="@string/daily_dev_quote"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#000"
@@ -216,7 +216,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="Stay motivated with daily developer quotes."
+                    android:text="@string/stay_motivated_with_daily_developer_quotes"
                     android:textSize="13sp"
                     android:textColor="#666"
                     android:layout_marginTop="4dp"
@@ -228,7 +228,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:text="Why DevVibe?"
+            android:text="@string/why_devvibe"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="28dp"
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="DevVibe is designed for developers who want to stay focused and productive. Combine relaxing music, task management, progress tracking and daily inspiration in one place."
+            android:text="@string/devvibe_is_designed_for_developers_who_want_to_stay_focused_and_productive_combine_relaxing_music_task_management_progress_tracking_and_daily_inspiration_in_one_place"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_marginTop="6dp"
@@ -259,7 +259,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Support DevVibe ❤️"
+                    android:text="@string/support_devvibe"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000"
@@ -267,7 +267,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:text="If you enjoy DevVibe, consider supporting the project. Your support helps improve features and keep the app alive."
+                    android:text="@string/if_you_enjoy_devvibe_consider_supporting_the_project_your_support_helps_improve_features_and_keep_the_app_alive"
                     android:textSize="14sp"
                     android:textColor="#555"
                     android:layout_marginTop="6dp"
@@ -276,7 +276,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDonate"
-                    android:text="Donate"
+                    android:text="@string/donate"
                     android:textColor="#FFFFFF"
                     android:layout_marginTop="12dp"
                     android:backgroundTint="#2196F3"
@@ -289,7 +289,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:text="DevVibe • Stay focused and build amazing things 🚀"
+            android:text="@string/devvibe_stay_focused_and_build_amazing_things"
             android:textSize="12sp"
             android:textColor="#777"
             android:gravity="center"

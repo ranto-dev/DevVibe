@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="DevVibe"
+                        android:text="@string/devvibe"
                         android:textSize="26sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:text="Focus • Build • Create"
+                        android:text="@string/focus_build_create"
                         android:textSize="14sp"
                         android:textColor="#E3F2FD"
                         android:layout_marginTop="4dp"
@@ -72,7 +72,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:text="About DevVibe"
+                android:text="@string/about_devvibe"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="DevVibe is a productivity companion designed for developers. It combines music, task management, progress tracking and daily inspiration."
+                android:text="@string/devvibe_is_a_productivity_companion_designed_for_developers_it_combines_music_task_management_progress_tracking_and_daily_inspiration"
                 android:textSize="14sp"
                 android:textColor="#555"
                 android:layout_marginTop="6dp"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Features"
+                android:text="@string/features"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="• Lofi coding music\n• Task management\n• Productivity statistics\n• Daily developer quotes"
+                android:text="@string/lofi_coding_music_n_task_management_n_productivity_statistics_n_daily_developer_quotes"
                 android:textSize="14sp"
                 android:textColor="#555"
                 android:layout_marginTop="6dp"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="App Version"
+                android:text="@string/app_version"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Version 1.0"
+                android:text="@string/version_1_0"
                 android:textSize="14sp"
                 android:textColor="#555"
                 android:layout_marginTop="4dp"
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Developer"
+                android:text="@string/developer"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="DevVibe is an independent project created to help developers stay focused and productive while building amazing things."
+                android:text="@string/devvibe_is_an_independent_project_created_to_help_developers_stay_focused_and_productive_while_building_amazing_things"
                 android:textSize="14sp"
                 android:textColor="#555"
                 android:layout_marginTop="4dp"
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Keep building amazing things 🚀"
+                android:text="@string/keep_building_amazing_things"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="© 2026 DevVibe"
+                android:text="@string/_2026_devvibe"
                 android:textSize="12sp"
                 android:textColor="#777"
                 android:gravity="center"

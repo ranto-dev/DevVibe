@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#FFFF">
 
-    <!-- HEADER -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
@@ -19,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get into focus mode 🚀"
+            android:text="@string/get_into_focus_mode"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"/>
@@ -27,13 +26,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plan your work and move forward without distractions"
+            android:text="@string/plan_your_work_and_move_forward_without_distractions"
             android:textColor="#E0E7FF"
             android:textSize="12sp"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
-    <!-- ACTIONS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,11 +56,11 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
+            android:contentDescription="@string/refresh_button_description"
             android:src="@android:drawable/ic_popup_sync"
             android:background="?attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 
-    <!-- EMPTY STATE -->
     <LinearLayout
         android:id="@+id/emptyStateLayout"
         android:orientation="vertical"
@@ -73,7 +71,7 @@
         android:padding="20dp">
 
         <TextView
-            android:text="🎯 Aucune tâche"
+            android:text="@string/aucune_tache"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#374151"
@@ -81,14 +79,13 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Ajoute une tâche pour commencer"
+            android:text="@string/ajoute_une_tache_pour_commencer"
             android:textSize="14sp"
             android:textColor="#6B7280"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- LISTE -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:visibility="gone"

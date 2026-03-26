@@ -29,8 +29,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
@@ -45,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="Help and Guide"
+                android:text="@string/help_and_guide"
                 android:textColor="#000"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -54,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="Learn how to use DevVibe to stay productive."
+                android:text="@string/learn_how_to_use_devvibe_to_stay_productive"
                 android:textColor="#666"
                 android:textSize="14sp" />
 
@@ -74,7 +73,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🎧 Lofi Coding Music"
+                        android:text="@string/lofi_coding_music"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -82,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Play relaxing lofi music to create a calm coding environment."
+                        android:text="@string/play_relaxing_lofi_music_to_create_a_calm_coding_environment"
                         android:textColor="#666"
                         android:textSize="14sp" />
 
@@ -106,7 +105,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🚀 Start With Project"
+                        android:text="@string/start_with_project"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -114,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Create tasks, organize your work and stay focused using DevVibe productivity tools."
+                        android:text="@string/create_tasks_organize_your_work_and_stay_focused_using_devvibe_productivity_tools"
                         android:textColor="#666"
                         android:textSize="14sp" />
 
@@ -138,7 +137,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📊 Dev Stats"
+                        android:text="@string/dev_stats"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -146,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Track your progress, completed tasks and productivity streak."
+                        android:text="@string/track_your_progress_completed_tasks_and_productivity_streak"
                         android:textColor="#666"
                         android:textSize="14sp" />
 
@@ -170,7 +169,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="💬 Daily Dev Quote"
+                        android:text="@string/daily_dev_quote"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -178,7 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Get daily inspiration from developers and innovators."
+                        android:text="@string/get_daily_inspiration_from_developers_and_innovators"
                         android:textColor="#666"
                         android:textSize="14sp" />
 
@@ -190,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Need help or have suggestions?"
+                android:text="@string/need_help_or_have_suggestions"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -200,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="#2196F3"
-                android:text="Send Feedback"
+                android:text="@string/send_feedback"
                 android:textColor="#FFFFFF"
                 app:cornerRadius="16dp" />
 

@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🎧 DevVibe Lofi"
+                android:text="@string/lofi_coding_music"
                 android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Focus, code and build your ideas with relaxing lofi beats."
+                android:text="@string/focus_code_and_build_your_ideas_with_relaxing_lofi_beats"
                 android:textColor="#444"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -44,7 +44,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="12dp"
             android:backgroundTint="#2196F3"
-            android:text="▶ Play Playlist"
+            android:text="@string/play_playlist"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -95,7 +95,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="🎵"
+                android:text="@string/music_emoji"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -119,7 +119,7 @@
 
             <TextView
                 android:id="@+id/logoText"
-                android:text="🎵 Lofi music"
+                android:text="@string/lofi_music"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:layout_weight="1"
@@ -131,7 +131,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="menu button"
+                android:contentDescription="@string/menu_button"
                 android:src="@android:drawable/ic_menu_more" />
         </LinearLayout>
 
@@ -160,7 +160,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="Music title"
+                android:text="@string/music_title"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -178,12 +178,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="00:00 / 00:00" />
+                android:text="@string/music_duration" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Volume"
+                android:text="@string/volume"
                 android:textStyle="bold" />
 
             <SeekBar
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#2196F3"
-                android:text="Loop Off"
+                android:text="@string/music_loop_stat"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>

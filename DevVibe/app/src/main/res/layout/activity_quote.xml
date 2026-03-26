@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Daily Dev Quote"
+        android:text="@string/daily_dev_quote"
         android:textColor="#222222"
         android:textSize="24sp"
         android:textStyle="italic" />
@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="#2196F3"
-        android:text="Next Quote"
+        android:text="@string/next_quote"
         android:textColor="#FFFFFF" />
 </LinearLayout>
