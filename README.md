@@ -1,106 +1,60 @@
 # 🚀 DevVibe
 
-**DevVibe** est une application mobile open-source conçue pour les développeurs (et toute personne créative) qui souhaitent créer une ambiance propice à la concentration, à la productivité et à l’inspiration.
+DevVibe est une application mobile open-source conçue pour optimiser l'environnement de travail des développeurs et des créateurs. En agissant sur les leviers de la concentration et de la discipline, l'application permet d'instaurer une atmosphère propice à la productivité et à l'état de "flow".
 
-> 💡 _Code better. Focus deeper. Stay in the vibe._
+> _Optimisez votre code. Approfondissez votre concentration. Maîtrisez votre environnement._
 
-## 🎯 Pourquoi DevVibe ?
+## Problématique
 
-Avant de coder, on a tous notre petit rituel…
+Le démarrage d'une session de travail complexe se heurte souvent à des barrières psychologiques : manque d'inspiration, fatigue cognitive ou difficultés à instaurer une routine de concentration immédiate. Ces interruptions dans le flux de travail nuisent à la régularité et à la qualité de la production technique.
 
-1. Ranger son workspace 🧹
-2. Allumer son PC et son moniteur 💻
-3. Préparer un bon café ☕
+## La Solution DevVibe
 
-Et puis… on s’assoit.
+DevVibe répond à ces enjeux en regroupant les outils essentiels à la performance mentale au sein d'une interface unique. L'objectif est de transformer l'intention de travailler en une action concrète et durable grâce à :
 
-Mais parfois, rien ne se passe.
+- L'immersion sonore pour stabiliser l'attention.
+- La structuration du temps pour éviter l'épuisement.
+- Le suivi analytique pour valoriser la progression.
 
-- Pas d’inspiration
-- Pas de motivation
-- Difficulté à démarrer
-- Fatigue ou procrastination
+## Fonctionnalités Principales
 
-👉 Tu écris quelques lignes… puis tu bloques.
-👉 Tu perds le flow.
-👉 Et tu te dis : _“Je vais continuer plus tard…”_
+- **Audio Focus** : Intégration de flux musicaux Lofi sélectionnés pour favoriser le travail cognitif profond.
+- **Time Blocking** : Gestionnaire de segments temporels pour organiser les sessions de travail et les pauses.
+- **Statistiques de Performance** : Tableau de bord incluant le temps de concentration total, les séries quotidiennes (streaks) et le décompte des sessions terminées.
+- **Système d'Engagement** : Citations quotidiennes ciblées pour maintenir la motivation intrinsèque.
 
-## 💡 La solution
+## Feuille de Route (Roadmap)
 
-**DevVibe** est né pour résoudre ce problème.
+Le développement se poursuit avec les objectifs suivants :
 
-L’objectif est simple :
-👉 Te mettre dans un **état de flow** rapidement
-👉 Créer une **ambiance productive**
-👉 T’aider à **rester constant dans tes efforts**
+- Migration du stockage local vers une API dédiée pour le flux audio.
+- Implémentation d'un système de favoris pour la personnalisation de l'expérience sonore.
+- Gestion de la lecture audio via les notifications système.
+- Visualisation avancée des données par l'intégration de graphiques de performance.
+- Synchronisation avec les statistiques de contribution GitHub.
+- Refonte de l'interface utilisateur selon les standards Material Design.
 
-## ✨ Ce que DevVibe t’apporte
+## Spécifications Techniques
 
-- 🎧 **Une ambiance musicale Lofi** pour entrer dans le flow
-- ⏱️ **Un système de Time Blocking** pour organiser ton travail
-- 📊 **Des statistiques développeur** pour suivre ta progression
-- 💬 **Des citations quotidiennes** pour rester motivé
+- **Langage** : Kotlin
+- **Plateforme** : Android SDK
+- **Interface** : Material Design Components
 
-## 🔥 Features
+## Philosophie du Projet
 
-- 🎵 **Lofi Music Playlist**
-- ⏳ **Time Blocking Manager**
-- 📈 **Dev Statistics**
-  - Dev Sessions
-  - Focus Time
-  - Daily Streak
-  - Achievements
+DevVibe repose sur le principe que la discipline surpasse la motivation éphémère. L'outil est conçu pour aider l'utilisateur à bâtir des habitudes solides, à suivre son évolution réelle et à transformer la contrainte du développement en un processus fluide et gratifiant.
 
-- 🧠 **Daily Dev Quote**
+> _"L'action n'est pas seulement la conséquence de la motivation ; elle en est également la source."_
 
-## 🚧 Fonctionnalités à venir
+## Contribution
 
-- [ ] 🎧 Intégration d’une **API Lofi Music** (actuellement stock local)
-- [ ] ❤️ Système **“Add to Favorites”** pour les musiques
-- [ ] 🔔 Lecture de musique via **notifications**
-- [ ] 📊 Ajout de **graphiques** pour les statistiques
-- [ ] 🔗 Intégration des **statistiques GitHub**
-- [ ] 🎨 Amélioration **UI/UX (Material Design)**
-- [ ] ⚡ Accès rapide aux fonctionnalités via **notifications intelligentes**
+En tant que projet open-source, DevVibe encourage la collaboration communautaire. Vous pouvez contribuer au projet de plusieurs manières :
 
-## 🛠️ Stack technique
+1.  Soumission de rapports d'erreurs (Bug Reports).
+2.  Propositions de nouvelles fonctionnalités.
+3.  Optimisation du code source ou de l'interface utilisateur.
+4.  Documentation et traduction.
 
-- 📱 **Kotlin**
-- 🧩 **Android SDK**
-- 🎨 **Material Design (en cours d’amélioration)**
+## Soutien
 
-## 🧠 Philosophie du projet
-
-DevVibe, ce n’est pas juste une app.
-
-C’est un outil pour :
-
-- Construire une discipline 🧱
-- Maintenir une motivation constante 🔥
-- Progresser chaque jour 📈
-
-> 💬 _“Ce n’est pas la motivation qui crée l’action, c’est l’action qui crée la motivation.”_
-
-## 🤝 Contribution
-
-Le projet est **open-source**, donc toute contribution est la bienvenue !
-
-Tu peux :
-
-- Proposer des idées 💡
-- Corriger des bugs 🐛
-- Améliorer le design 🎨
-- Ajouter des features 🚀
-
-## ⭐ Support
-
-Si tu aimes le projet :
-
-👉 Mets une ⭐ sur le repo
-👉 Partage-le à d’autres devs
-
-## 🎧 Conclusion
-
-DevVibe est là pour t’aider à répondre à cette question :
-
-> _Comment passer de “je dois coder” à “j’ai envie de coder” ?_
+Si vous trouvez ce projet utile, vous pouvez nous soutenir en ajoutant une étoile au dépôt GitHub ou en partageant l'application avec votre réseau de développeurs.
