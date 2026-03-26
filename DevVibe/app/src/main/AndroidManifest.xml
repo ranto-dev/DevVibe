@@ -29,9 +29,6 @@
             android:name=".activities.AddEditTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".DevStatsActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.QuoteActivity"
             android:exported="false" />
         <activity
