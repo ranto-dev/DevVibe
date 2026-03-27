@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-    Layout : activity_about.xml
-
-    Description :
-    Interface pour l'affichage des informations sur l'application.
-
-    Contenu :
-    - LinearLayout : pour la gestion des affichages
-    - ScrollView : pour la gestion scroll de l'ecran
-    - Boutons : play, pause, next, previous
-    - Menu : accès à la playlist
-
-    Organisation :
-    - LinearLayout vertical
-    - Header avec menu
-    - MaterialCardView: pour un UI moderne
-    - TextView : Pour l'affichage des informations et des contenus textes sur l'ecran
-
-    Auteur : Ranto Andrianandraina
--->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"

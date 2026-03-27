@@ -1,34 +1,3 @@
-/*
- * Activity : MusicActivity
- *
- * Description :
- * Cette activité gère la lecture de musique dans l'application DevVibe.
- * Elle permet à l'utilisateur de :
- * - Parcourir une playlist
- * - Lire / mettre en pause une musique
- * - Naviguer entre les pistes (suivante / précédente)
- * - Activer ou désactiver le mode boucle
- * - Contrôler le volume
- * - Visualiser la progression de lecture
- *
- * Architecture :
- * – Utilise un MusicService pour gérer la lecture en arrière-plan
- * - Communication via ServiceConnection (bindService).
- * -  Mise à jour UI via Handler (thread principal)
- *
- * Composants UI :
- * - Player principal (lecture, progression, contrôles).
- * - Playlist (RecyclerView).
- * - Mini player (lecture rapide en bas)
- *
- * Fonctionnalités clés :
- * - Synchronisation UI avec le service audio
- * - Animation du vinyle pendant la lecture
- * - Gestion automatique de la fin de piste
- *
- * Auteur : Ranto Andrianandraina
-* */
-
 package com.ranto.devvibe.activities
 
 import android.content.*
